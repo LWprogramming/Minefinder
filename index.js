@@ -35,3 +35,5 @@ mineLocations.forEach(function(item, index, array) {
     document.getElementById('button' + item[0] + item[1]).innerHTML = '*'; // TODO COORDINATE 
     console.log(item, index);
 });
+
+// TODO: implement game logic, i.e. for every non-mine cell, write a function to determine number of mines around it and fill.
