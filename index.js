@@ -1,6 +1,14 @@
+
+
+// game parameters
 var cellsPerRow = 6;
 var cellsPerCol = 6;
+var numMines = 5; // todo: put in a check so that the number of mines doesn't exceed the number of cells.
 
+// generate random locations for mines.
+
+
+// Put together game board.
 for (var row = 0; row < cellsPerRow; row++) {
     var divRow = document.createElement('div');
     divRow.className = 'row';
