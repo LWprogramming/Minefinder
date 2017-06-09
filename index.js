@@ -12,6 +12,7 @@ for (var row = 0; row < cellsPerRow; row++) {
         button.className = 'button col-xs-' + 12 / cellsPerCol;
         button.onclick = function() {
             console.log(this.id);
+            // TODO: refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something.
         }
         divRow.appendChild(button);   
     }
