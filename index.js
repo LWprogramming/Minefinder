@@ -1,6 +1,7 @@
 // If Javascript is not disabled, then remove the message saying that it is.
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
 jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
+// TODO: this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 
 // game parameters
 var cellsPerRow = 6;
