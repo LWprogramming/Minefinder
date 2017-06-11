@@ -1,3 +1,7 @@
+// If Javascript is not disabled, then remove the message saying that it is.
+var jsDisabledMessage = document.getElementById("Javascript disabled message");
+jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
+
 // game parameters
 var cellsPerRow = 6;
 var cellsPerCol = 6;
