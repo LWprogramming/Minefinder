@@ -8,6 +8,11 @@ var cellsPerRow = 6;
 var cellsPerCol = 6;
 var numMines = 5; // todo: put in a check so that the number of mines doesn't exceed the number of cells.
 
+function cell(row, col) {
+    // represents one cell on the board.
+    this.row = row;
+    this.col = col;
+}
 
 // Put together game board.
 for (var row = 0; row < cellsPerRow; row++) {
@@ -33,14 +38,14 @@ var mineLocations = [];
 for (var i = 0; i < numMines; i++){
     var row = Math.floor(Math.random() * cellsPerRow);
     var col = Math.floor(Math.random() * cellsPerCol);
-    mineLocations.push([row, col]);
+    mineLocations.push(new cell(row, col));
 }
 
 function generateGameBoard() {
     // place mines
-    mineLocations.forEach(function(item, index, array) {
-        document.getElementById('button' + item[0] + item[1]).innerHTML = '*'; // TODO COORDINATE 
-        console.log(item, index);
+    mineLocations.forEach(function(mine, index, array) {
+        document.getElementById('button' + mine.row + mine.col).innerHTML = '*';
+        console.log(mine, index);
     });
     
 }
