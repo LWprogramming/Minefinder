@@ -36,9 +36,16 @@ for (var i = 0; i < numMines; i++){
     mineLocations.push([row, col]);
 }
 
-mineLocations.forEach(function(item, index, array) {
-    document.getElementById('button' + item[0] + item[1]).innerHTML = '*'; // TODO COORDINATE 
-    console.log(item, index);
-});
+function generateGameBoard() {
+    // place mines
+    mineLocations.forEach(function(item, index, array) {
+        document.getElementById('button' + item[0] + item[1]).innerHTML = '*'; // TODO COORDINATE 
+        console.log(item, index);
+    });
+    
+}
+
+generateGameBoard();
+
 
 // TODO: implement game logic, i.e. for every non-mine cell, write a function to determine number of mines around it and fill.
