@@ -12,6 +12,7 @@ function cell(row, col) {
     // represents one cell on the board.
     this.row = row;
     this.col = col;
+    this.isEqual = function(otherCell) {return (this.row == otherCell.row) && (this.col == otherCell.col);} // rather hacky and will need to change if the definition of cell changes, but unfortunately Javascript doesn't seem to have a compare objects by value equality operator. 
 }
 
 // Put together game board.
@@ -41,6 +42,19 @@ for (var i = 0; i < numMines; i++){
     mineLocations.push(new cell(row, col));
 }
 
+function numAdjacent(row, col, mineLocations) {
+    // returns the number of mines adjacent to the cell with given row and column.
+    // mineLocations is an array of cells that are the locations of the mines.
+    var adj = 0;
+    mineLocations.forEach(function(cell, index, array) {
+        if ((row <= cell.row + 1) && (row >= cell.row - 1) && 
+            (col <= cell.col + 1) && (col >= cell.col - 1)) {
+            adj++;
+        }
+    });
+    return adj;
+}
+
 function generateGameBoard() {
     // place mines
     mineLocations.forEach(function(mine, index, array) {
@@ -48,6 +62,16 @@ function generateGameBoard() {
         console.log(mine, index);
     });
 
+    // assign numbers to non-numerical cells
+    for (var row = 0; row < numRows; row++) {
+        for (var col = 0; col < numCols; col++) {
+            if (!mineLocations.find((mineLocation, index, array) => {
+                return mineLocation.isEqual(new cell(row, col)); })) {
+                // If the given cell is not found within mineLocations, then that cell doesn't have a mine.
+                document.getElementById('button' + row + col).innerHTML = numAdjacent(row, col, mineLocations);
+            }
+        }
+    }
 }
 
 generateGameBoard();
