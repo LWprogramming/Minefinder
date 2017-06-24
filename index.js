@@ -17,13 +17,12 @@ var cellStatusEnum = {
     RIGHTCLICKED: -1
 }
 
-function cell(row, col, status=cellStatusEnum.UNCLICKED) {
+function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
     this.row = row;
     this.col = col;
     this.clicked = status;
-
-
+    this.mineStatus = mineStatus; // -1 indicates this cell is a mine; 0-8 indicates number of adjacent mines. -2 indicates this didn't get initialized--this shouldn't happen but potentially a useful flag.
 }
 
 function numAdjacent(row, col, mineLocations) {
@@ -39,50 +38,40 @@ function numAdjacent(row, col, mineLocations) {
     return adj;
 }
 
-/*
-Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols.
+/* Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols.
 
-todo: refactor this to take parameters instead of relying on global variables numRows, numCols, and numMines.
-*/
+todo: refactor this to take parameters instead of relying on global variables numRows, numCols, and numMines. */
 function generateGameBoard() {
-    // var gameBoard = Array(numRows).fill(Array(numCols).fill(0)); // placeholder to make everything zero at first.
-
     var gameBoard = [];
     for (var row = 0; row < numRows; row++) {
         var rowArray = [];
         for (var col = 0; col < numCols; col++) {
-            rowArray.push(0);
+            rowArray.push(new cell(row, col));
         }
         gameBoard.push(rowArray);
     }
-    /** gameBoard[row][col] is 2-D int array representing the status of the cells. If a given element is -1, then there is a mine at that location; otherwise, the number is the number of mines around it. */
-
     // generate random locations for mines.
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
     for (var i = 0; i < numMines; i++){
         var row = Math.floor(Math.random() * numRows);
         var col = Math.floor(Math.random() * numCols);
-        gameBoard[row][col] = -1; // -1 indicates is a mine.
+        gameBoard[row][col].mineStatus = -1;
         mineLocations.push(new cell(row, col));
     }
 
     // assign numbers to non-numerical cells
     for (var row = 0; row < numRows; row++) {
         for (var col = 0; col < numCols; col++) {
-            if (gameBoard[row][col] != -1) {
+            if (gameBoard[row][col].mineStatus != -1) {
                 // If the given cell doesn't have a mine, then we need the number of mines around it.
-                // console.log(gameBoard[row][col]);
-                gameBoard[row][col] = numAdjacent(row, col, mineLocations);
+                gameBoard[row][col].mineStatus = numAdjacent(row, col, mineLocations);
             }
         }
     }
-
     return gameBoard;
 }
 
 var gameBoard = generateGameBoard();
-
-// console.log(gameBoard);
 
 // useful for simulating clicks
 var clickEvent = new MouseEvent("click", {
@@ -112,7 +101,7 @@ for (var row = 0; row < numRows; row++) {
             }
             var thisRow = this.id[6]; // COORDINATE
             var thisCol = this.id[7]; // COORDINATE
-            if (gameBoard[thisRow][thisCol] == 0) {
+            if (gameBoard[thisRow][thisCol].mineStatus == 0) {
                 // no mines, click all adjacent cells as well.
                 
                 /* CONTINUE HERE NEXT TIME
@@ -124,7 +113,7 @@ for (var row = 0; row < numRows; row++) {
                 // document.getElementById('button' + (thisRow - 1) + thisCol).dispatchEvent(clickEvent);
                 
             }
-            if (gameBoard[thisRow][thisCol] == -1) {
+            if (gameBoard[thisRow][thisCol].mineStatus == -1) {
                 // clicked a mine
                 if (DEBUG) {
                     console.log("Game over!");
@@ -141,8 +130,8 @@ for (var row = 0; row < numRows; row++) {
 for (var row = 0; row < numRows; row++) {
     for (var col = 0; col < numCols; col++) {
         var symbol;
-        if (gameBoard[row][col] != -1) {
-            symbol = '' + gameBoard[row][col];
+        if (gameBoard[row][col].mineStatus != -1) {
+            symbol = '' + gameBoard[row][col].mineStatus;
         }
         else {
             symbol = "*"; // for mines
