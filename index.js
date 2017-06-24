@@ -3,6 +3,8 @@ var jsDisabledMessage = document.getElementById("Javascript disabled message");
 jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
 // TODO: this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 
+var DEBUG = true; 
+
 // game parameters
 var numRows = 6;
 var numCols = 6;
@@ -28,7 +30,9 @@ for (var row = 0; row < numRows; row++) {
         button.className = 'button col-xs-' + 12 / numCols;
         button.onclick = function() {
             console.log(this.id);
-            this.style.background = 'cyan'; // for debugging purposes.
+            if (DEBUG) {
+                this.style.background = 'cyan'; // for debugging purposes.
+            }
         }
         divRow.appendChild(button);   
     }
