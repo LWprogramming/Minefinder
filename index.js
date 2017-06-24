@@ -1,14 +1,33 @@
+//TODO FOR NEXT TIME:
+// 1. implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
+// 2. Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked, rightclicked to clicked.
+// 3. implement logic to stop the game if a mine is clicked. also display a game-over message.
+// 4. add reset button that can be clicked at any time. erases the game over message.
+
+/*
+Other assorted things (no set timeline)
+- allow user to input their choice of dimensions and number of mines. put in some sort of limit on this, though--can't support 9 million cells, for instance. also put in a check so that the number of mines doesn't exceed the number of cells.
+- refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
+- refactor generateGameBoard to take parameters instead of relying on global variables numRows, numCols, and numMines.
+- this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
+- add a game timer
+- add game statistics (that can be reset of course) and leaderboard
+- support chording--look up minesweeper wiki for this.
+
+- overall plan-- implement logic => design/UI/UX => github pages => user testing.
+*/ 
+
+
 // If Javascript is not disabled, then remove the message saying that it is.
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
 jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
-// TODO: this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 
 var DEBUG = true; 
 
 // game parameters
 var numRows = 6;
 var numCols = 6;
-var numMines = 5; // todo: put in a check so that the number of mines doesn't exceed the number of cells.
+var numMines = 5;
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -38,9 +57,7 @@ function numAdjacent(row, col, mineLocations) {
     return adj;
 }
 
-/* Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols.
-
-todo: refactor this to take parameters instead of relying on global variables numRows, numCols, and numMines. */
+/* Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols. */
 function generateGameBoard() {
     var gameBoard = [];
     for (var row = 0; row < numRows; row++) {
@@ -87,13 +104,13 @@ for (var row = 0; row < numRows; row++) {
     for (var col = 0; col < numCols; col++) {
         var button = document.createElement('button');
         button.id = 'button' + row + col;
-        // TODO: refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
+        // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
         // https://stackoverflow.com/a/16775485
         button.typeName = 'button';
         button.innerHTML = '.';
         button.className = 'button col-xs-' + 12 / numCols;
         // button.row = row;
-        // button.colum = col; // todo fix this at some point. COORDINATE
+        // button.colum = col; // COORDINATE
         button.onclick = function() {
             console.log(this.id);
             if (DEBUG) {
@@ -118,7 +135,6 @@ for (var row = 0; row < numRows; row++) {
                 if (DEBUG) {
                     console.log("Game over!");
                 }
-                //TODO: implement code if it's not in debug mode.
             }
         }
         divRow.appendChild(button);
