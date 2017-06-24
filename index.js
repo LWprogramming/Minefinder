@@ -90,6 +90,7 @@ for (var row = 0; row < numRows; row++) {
         var button = document.createElement('button');
         button.id = 'button' + row + col;
         // TODO: refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
+        // https://stackoverflow.com/a/16775485
         button.typeName = 'button';
         button.innerHTML = '.';
         button.className = 'button col-xs-' + 12 / numCols;
@@ -101,7 +102,7 @@ for (var row = 0; row < numRows; row++) {
                 this.style.background = 'cyan';
             }
         }
-        divRow.appendChild(button);   
+        divRow.appendChild(button);
     }
     document.getElementById('grid').appendChild(divRow);
 }
@@ -116,8 +117,6 @@ for (var row = 0; row < numRows; row++) {
         else {
             symbol = "*"; // for mines
         }
-        document.getElementById('button' + row + col).innerHTML = symbol;
+        document.getElementById('button' + row + col).innerHTML = symbol; //COORDINATE
     }
 }
-
-// TODO: implement game logic, i.e. for every non-mine cell, write a function to determine number of mines around it and fill.
