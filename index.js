@@ -22,7 +22,8 @@ function cell(row, col, status=cellStatusEnum.UNCLICKED) {
     this.row = row;
     this.col = col;
     this.clicked = status;
-    this.isEqual = function(otherCell) {return (this.row == otherCell.row) && (this.col == otherCell.col);} // rather hacky and will need to change if the definition of cell changes, but unfortunately Javascript doesn't seem to have a compare objects by value equality operator. 
+
+
 }
 
 function numAdjacent(row, col, mineLocations) {
