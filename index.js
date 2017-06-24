@@ -17,28 +17,6 @@ function cell(row, col) {
     this.isEqual = function(otherCell) {return (this.row == otherCell.row) && (this.col == otherCell.col);} // rather hacky and will need to change if the definition of cell changes, but unfortunately Javascript doesn't seem to have a compare objects by value equality operator. 
 }
 
-// Put together game board.
-for (var row = 0; row < numRows; row++) {
-    var divRow = document.createElement('div');
-    divRow.className = 'row';
-    for (var col = 0; col < numCols; col++) {
-        var button = document.createElement('button');
-        button.id = 'button' + row + col;
-        // TODO: refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
-        button.typeName = 'button';
-        button.innerHTML = '.';
-        button.className = 'button col-xs-' + 12 / numCols;
-        button.onclick = function() {
-            console.log(this.id);
-            if (DEBUG) {
-                this.style.background = 'cyan'; // for debugging purposes.
-            }
-        }
-        divRow.appendChild(button);   
-    }
-    document.getElementById('grid').appendChild(divRow);
-}
-
 function numAdjacent(row, col, mineLocations) {
     // returns the number of mines adjacent to the cell with given row and column.
     // mineLocations is an array of cells that are the locations of the mines.
@@ -90,24 +68,56 @@ function generateGameBoard() {
         }
     }
 
-    // NOTE TO FUTURE SELF-- YOU CAN'T PUT THIS IN THE PREVIOUS LOOP.
-    // because for any given cell, the entire board might not be fully set up yet so assigning numbers could give bad results.
-    for (var row = 0; row < numRows; row++) {
-        for (var col = 0; col < numCols; col++) {
-            var symbol;
-            if (gameBoard[row][col] != -1) {
-                symbol = '' + gameBoard[row][col];
-            }
-            else {
-                symbol = "*"; // for mines
-            }
-            document.getElementById('button' + row + col).innerHTML = symbol;
-        }
-    }
     return gameBoard;
 }
 
-generateGameBoard();
+var gameBoard = generateGameBoard();
 
+// console.log(gameBoard);
+
+// useful for simulating clicks
+var clickEvent = new MouseEvent("click", {
+                    "view": window,
+                    "bubbles": true,
+                    "cancelable": false
+                });
+
+// Put together game board.
+for (var row = 0; row < numRows; row++) {
+    var divRow = document.createElement('div');
+    divRow.className = 'row';
+    for (var col = 0; col < numCols; col++) {
+        var button = document.createElement('button');
+        button.id = 'button' + row + col;
+        // TODO: refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
+        button.typeName = 'button';
+        button.innerHTML = '.';
+        button.className = 'button col-xs-' + 12 / numCols;
+        button.row = row;
+        button.colum = col;
+        button.onclick = function() {
+            console.log(this.id);
+            if (DEBUG) {
+                this.style.background = 'cyan';
+            }
+        }
+        divRow.appendChild(button);   
+    }
+    document.getElementById('grid').appendChild(divRow);
+}
+
+// fill out each button with the correct content.
+for (var row = 0; row < numRows; row++) {
+    for (var col = 0; col < numCols; col++) {
+        var symbol;
+        if (gameBoard[row][col] != -1) {
+            symbol = '' + gameBoard[row][col];
+        }
+        else {
+            symbol = "*"; // for mines
+        }
+        document.getElementById('button' + row + col).innerHTML = symbol;
+    }
+}
 
 // TODO: implement game logic, i.e. for every non-mine cell, write a function to determine number of mines around it and fill.
