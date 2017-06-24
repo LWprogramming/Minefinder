@@ -28,6 +28,7 @@ for (var row = 0; row < numRows; row++) {
         button.className = 'button col-xs-' + 12 / numCols;
         button.onclick = function() {
             console.log(this.id);
+            this.style.background = 'cyan'; // for debugging purposes.
         }
         divRow.appendChild(button);   
     }
