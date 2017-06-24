@@ -10,10 +10,18 @@ var numRows = 6;
 var numCols = 6;
 var numMines = 5; // todo: put in a check so that the number of mines doesn't exceed the number of cells.
 
-function cell(row, col) {
+// cell status must be one of these.
+var cellStatusEnum = {
+    UNCLICKED: 0,
+    CLICKED: 1,
+    RIGHTCLICKED: -1
+}
+
+function cell(row, col, status=cellStatusEnum.UNCLICKED) {
     // represents one cell on the board.
     this.row = row;
     this.col = col;
+    this.clicked = status;
     this.isEqual = function(otherCell) {return (this.row == otherCell.row) && (this.col == otherCell.col);} // rather hacky and will need to change if the definition of cell changes, but unfortunately Javascript doesn't seem to have a compare objects by value equality operator. 
 }
 
@@ -94,12 +102,33 @@ for (var row = 0; row < numRows; row++) {
         button.typeName = 'button';
         button.innerHTML = '.';
         button.className = 'button col-xs-' + 12 / numCols;
-        button.row = row;
-        button.colum = col;
+        // button.row = row;
+        // button.colum = col; // todo fix this at some point. COORDINATE
         button.onclick = function() {
             console.log(this.id);
             if (DEBUG) {
                 this.style.background = 'cyan';
+            }
+            var thisRow = this.id[6]; // COORDINATE
+            var thisCol = this.id[7]; // COORDINATE
+            if (gameBoard[thisRow][thisCol] == 0) {
+                // no mines, click all adjacent cells as well.
+                
+                /* CONTINUE HERE NEXT TIME
+                Implementation logic:
+                add list of cells to adjacentCellsList iff we don't go off the edge of the board AND that particular cell hasn't been already clicked (otherwise we run into problems with two adjacent cells that are both zero).
+                */
+                // adjacentCellsList = 
+
+                // document.getElementById('button' + (thisRow - 1) + thisCol).dispatchEvent(clickEvent);
+                
+            }
+            if (gameBoard[thisRow][thisCol] == -1) {
+                // clicked a mine
+                if (DEBUG) {
+                    console.log("Game over!");
+                }
+                //TODO: implement code if it's not in debug mode.
             }
         }
         divRow.appendChild(button);
