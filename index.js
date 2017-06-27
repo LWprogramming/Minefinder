@@ -6,6 +6,7 @@
 
 /*
 Other assorted things (no set timeline)
+- add difficulty settings (easy medium hard) as presets
 - allow user to input their choice of dimensions and number of mines. put in some sort of limit on this, though--can't support 9 million cells, for instance. also put in a check so that the number of mines doesn't exceed the number of cells.
 - refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
 - refactor generateGameBoard to take parameters instead of relying on global variables numRows, numCols, and numMines.
@@ -13,6 +14,7 @@ Other assorted things (no set timeline)
 - add a game timer
 - add game statistics (that can be reset of course) and leaderboard
 - support chording--look up minesweeper wiki for this.
+- make the website independent of browser, version, mobile vs desktop, etc.
 
 - overall plan-- implement logic => design/UI/UX => github pages => user testing.
 */ 
