@@ -42,7 +42,7 @@ function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
     this.row = row;
     this.col = col;
-    this.clicked = status;
+    this.status = status;
     this.mineStatus = mineStatus; // -1 indicates this cell is a mine; 0-8 indicates number of adjacent mines. -2 indicates this didn't get initialized--this shouldn't happen but potentially a useful flag.
 }
 
