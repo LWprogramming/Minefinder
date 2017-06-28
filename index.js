@@ -114,24 +114,59 @@ for (var row = 0; row < numRows; row++) {
         // button.row = row;
         // button.colum = col; // COORDINATE
         button.onclick = function() {
-            console.log(this.id);
-            var thisRow = this.id[6]; // COORDINATE
-            var thisCol = this.id[7]; // COORDINATE
+            var thisRow = parseInt(this.id[6]); // COORDINATE
+            var thisCol = parseInt(this.id[7]); // COORDINATE
             gameBoard[thisRow][thisCol].clicked = cellStatusEnum.CLICKED;
             if (DEBUG) {
                 this.style.background = 'cyan';
             }
             if (gameBoard[thisRow][thisCol].mineStatus == 0) {
-                // no mines, click all adjacent cells as well.
+                // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.                
                 
-                /* CONTINUE HERE NEXT TIME
-                Implementation logic:
-                add list of cells to adjacentCellsList iff we don't go off the edge of the board AND that particular cell hasn't been already clicked (otherwise we run into problems with two adjacent cells that are both zero).
-                */
-                // adjacentCellsList = 
+                var adjacentCellsList = []; // list of cells adjacent to current cell.
+                if (thisRow != 0) {
+                    if (thisCol != 0) {
+                        // upper left exists
+                        adjacentCellsList.push([thisRow - 1, thisCol - 1]);
+                    }
+                    if (thisCol != numCols - 1) {
+                        // upper right exists
+                        adjacentCellsList.push([thisRow - 1, thisCol + 1]);
+                    }
+                    // cell directly above exists
+                    adjacentCellsList.push([thisRow - 1, thisCol]);
+                }
+                if (thisRow != numRows - 1) {
+                    if (thisCol != 0) {
+                        // lower left exists
+                        adjacentCellsList.push([thisRow + 1, thisCol - 1]);
+                    }
+                    if (thisCol != numCols - 1) {
+                        // lower right exists
+                        adjacentCellsList.push([thisRow + 1, thisCol + 1]);
+                    }
+                    // cell directly below exists
+                    adjacentCellsList.push([thisRow + 1, thisCol]);
+                }
+                if (thisCol != 0) {
+                    // cell to left exists
+                    adjacentCellsList.push([thisRow, thisCol - 1]);
+                }
+                if (thisCol != numCols - 1) {
+                    // cell to right exists
+                    adjacentCellsList.push([thisRow, thisCol + 1]);
+                }
+                console.log(adjacentCellsList);
 
-                // document.getElementById('button' + (thisRow - 1) + thisCol).dispatchEvent(clickEvent);
-                
+                for (var i = 0; i < adjacentCellsList.length; i++) {
+                    adjCell = adjacentCellsList[i];
+                    var adjRow = adjCell[0];
+                    var adjCol = adjCell[1];
+                    console.log(gameBoard[adjRow][adjCell]);
+                    if (gameBoard[adjRow][adjCol].status == cellStatusEnum.UNCLICKED) {
+                        document.getElementById('button' + adjRow + adjCol).dispatchEvent(clickEvent);
+                    }
+                }
             }
             if (gameBoard[thisRow][thisCol].mineStatus == -1) {
                 // clicked a mine
