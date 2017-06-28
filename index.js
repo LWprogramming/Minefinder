@@ -99,6 +99,7 @@ var clickEvent = new MouseEvent("click", {
                     "cancelable": false
                 });
 
+
 // Put together game board.
 for (var row = 0; row < numRows; row++) {
     var divRow = document.createElement('div');
@@ -116,7 +117,7 @@ for (var row = 0; row < numRows; row++) {
         button.onclick = function() {
             var thisRow = parseInt(this.id[6]); // COORDINATE
             var thisCol = parseInt(this.id[7]); // COORDINATE
-            gameBoard[thisRow][thisCol].clicked = cellStatusEnum.CLICKED;
+            gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
             if (DEBUG) {
                 this.style.background = 'cyan';
             }
@@ -156,15 +157,16 @@ for (var row = 0; row < numRows; row++) {
                     // cell to right exists
                     adjacentCellsList.push([thisRow, thisCol + 1]);
                 }
-                console.log(adjacentCellsList);
+                // console.log(adjacentCellsList);
 
                 for (var i = 0; i < adjacentCellsList.length; i++) {
                     adjCell = adjacentCellsList[i];
                     var adjRow = adjCell[0];
                     var adjCol = adjCell[1];
-                    console.log(gameBoard[adjRow][adjCell]);
+                    // console.log(gameBoard[adjRow][adjCell]);
                     if (gameBoard[adjRow][adjCol].status == cellStatusEnum.UNCLICKED) {
-                        document.getElementById('button' + adjRow + adjCol).dispatchEvent(clickEvent);
+                        // document.getElementById('button' + adjRow + adjCol).dispatchEvent(clickEvent);
+                        document.getElementById('button' + adjRow + adjCol).onclick();
                     }
                 }
             }
