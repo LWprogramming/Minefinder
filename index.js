@@ -1,6 +1,6 @@
 //TODO FOR NEXT TIME:
 // 1. [DONE] implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
-// 2. Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
+// 2. [WIP] [done first part, now just need to try all transitions and make sure only legal ones do anything] Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
 // 3. implement logic to stop the game if a mine is clicked. also display a game-over message.
 // 4. add reset button that can be clicked at any time. erases the game over message.
 
@@ -107,7 +107,9 @@ for (var row = 0; row < numRows; row++) {
         button.className = 'button col-xs-' + 12 / numCols;
         // button.row = row;
         // button.colum = col; // COORDINATE
-        button.onclick = function() {
+
+        // left-click logic
+        button.onclick = function(event) {
             var thisRow = parseInt(this.id[6]); // COORDINATE
             var thisCol = parseInt(this.id[7]); // COORDINATE
             gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
@@ -165,6 +167,20 @@ for (var row = 0; row < numRows; row++) {
                 }
             }
         }
+
+        // right-click logic
+        button.onmouseup = function(event) {
+            if (event.which == 3) {
+                var thisRow = parseInt(this.id[6]); // COORDINATE
+                var thisCol = parseInt(this.id[7]); // COORDINATE
+                if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
+                    if (DEBUG) {
+                        console.log('right-clicked ' + this.id);   
+                    }
+                }
+            }
+        }
+
         divRow.appendChild(button);
     }
     document.getElementById('grid').appendChild(divRow);
