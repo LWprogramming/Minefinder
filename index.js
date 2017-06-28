@@ -1,6 +1,6 @@
 //TODO FOR NEXT TIME:
-// 1. implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
-// 2. Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked, rightclicked to clicked.
+// 1. [DONE] implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
+// 2. Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
 // 3. implement logic to stop the game if a mine is clicked. also display a game-over message.
 // 4. add reset button that can be clicked at any time. erases the game over message.
 
