@@ -92,14 +92,6 @@ function generateGameBoard() {
 
 var gameBoard = generateGameBoard();
 
-// useful for simulating clicks
-var clickEvent = new MouseEvent("click", {
-                    "view": window,
-                    "bubbles": true,
-                    "cancelable": false
-                });
-
-
 // Put together game board.
 for (var row = 0; row < numRows; row++) {
     var divRow = document.createElement('div');
@@ -122,8 +114,7 @@ for (var row = 0; row < numRows; row++) {
                 this.style.background = 'cyan';
             }
             if (gameBoard[thisRow][thisCol].mineStatus == 0) {
-                // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.                
-                
+                // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.
                 var adjacentCellsList = []; // list of cells adjacent to current cell.
                 if (thisRow != 0) {
                     if (thisCol != 0) {
@@ -157,15 +148,11 @@ for (var row = 0; row < numRows; row++) {
                     // cell to right exists
                     adjacentCellsList.push([thisRow, thisCol + 1]);
                 }
-                // console.log(adjacentCellsList);
-
                 for (var i = 0; i < adjacentCellsList.length; i++) {
                     adjCell = adjacentCellsList[i];
                     var adjRow = adjCell[0];
                     var adjCol = adjCell[1];
-                    // console.log(gameBoard[adjRow][adjCell]);
                     if (gameBoard[adjRow][adjCol].status == cellStatusEnum.UNCLICKED) {
-                        // document.getElementById('button' + adjRow + adjCol).dispatchEvent(clickEvent);
                         document.getElementById('button' + adjRow + adjCol).onclick();
                     }
                 }
