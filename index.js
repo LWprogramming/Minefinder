@@ -15,6 +15,7 @@ Other assorted things (no set timeline)
 - add game statistics (that can be reset of course) and leaderboard
 - support chording--look up minesweeper wiki for this.
 - make the website independent of browser, version, mobile vs desktop, etc.
+- see link: http://www.chezpoor.com/minesweeper/help/minetechnicalnotes.html
 
 - overall plan-- implement logic => design/UI/UX => github pages => user testing.
 */ 
