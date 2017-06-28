@@ -115,12 +115,12 @@ for (var row = 0; row < numRows; row++) {
         // button.colum = col; // COORDINATE
         button.onclick = function() {
             console.log(this.id);
-            this.clicked = cellStatusEnum.CLICKED;
+            var thisRow = this.id[6]; // COORDINATE
+            var thisCol = this.id[7]; // COORDINATE
+            gameBoard[thisRow][thisCol].clicked = cellStatusEnum.CLICKED;
             if (DEBUG) {
                 this.style.background = 'cyan';
             }
-            var thisRow = this.id[6]; // COORDINATE
-            var thisCol = this.id[7]; // COORDINATE
             if (gameBoard[thisRow][thisCol].mineStatus == 0) {
                 // no mines, click all adjacent cells as well.
                 
