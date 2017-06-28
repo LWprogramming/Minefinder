@@ -115,7 +115,7 @@ for (var row = 0; row < numRows; row++) {
         // button.colum = col; // COORDINATE
         button.onclick = function() {
             console.log(this.id);
-            this.clicked = CLICKED;
+            this.clicked = cellStatusEnum.CLICKED;
             if (DEBUG) {
                 this.style.background = 'cyan';
             }
