@@ -1,6 +1,6 @@
 //TODO FOR NEXT TIME:
 // 1. [DONE] implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
-// 2. [WIP] [done first part, now just need to try all transitions and make sure only legal ones do anything] Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
+// 2. [DONE] Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
 // 3. implement logic to stop the game if a mine is clicked. also display a game-over message.
 // 4. add reset button that can be clicked at any time. erases the game over message.
 
@@ -104,6 +104,7 @@ for (var row = 0; row < numRows; row++) {
         button.typeName = 'button';
         button.innerHTML = '.';
         button.className = 'button col-xs-' + 12 / numCols;
+        button.style.background = 'white';
         // button.row = row;
         // button.colum = col; // COORDINATE
 
@@ -111,6 +112,9 @@ for (var row = 0; row < numRows; row++) {
         button.onclick = function(event) {
             var thisRow = parseInt(this.id[6]); // COORDINATE
             var thisCol = parseInt(this.id[7]); // COORDINATE
+            if (gameBoard[thisRow][thisCol].status != cellStatusEnum.UNCLICKED) {
+                return; // can't click unless the cell is in its UNCLICKED state.
+            }
             gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
             if (DEBUG) {
                 this.style.background = 'cyan';
@@ -173,10 +177,16 @@ for (var row = 0; row < numRows; row++) {
                 var thisRow = parseInt(this.id[6]); // COORDINATE
                 var thisCol = parseInt(this.id[7]); // COORDINATE
                 if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
+                    gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
                     if (DEBUG) {
-                        console.log('right-clicked ' + this.id);   
+                        this.style.background = 'red';
                     }
                 }
+                else if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
+                    gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
+                    this.style.background = 'white';
+                }
+                    
             }
         }
 
