@@ -18,15 +18,14 @@ Other assorted things (no set timeline)
 - see link: http://www.chezpoor.com/minesweeper/help/minetechnicalnotes.html
 
 - overall plan-- implement logic => design/UI/UX => github pages => user testing.
-*/ 
+*/
 
 
 // If Javascript is not disabled, then remove the message saying that it is.
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
 jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
 
-var DEBUG = true; 
-
+var DEBUG = true;
 // game parameters
 var numRows = 6;
 var numCols = 6;
@@ -37,7 +36,7 @@ var cellStatusEnum = {
     UNCLICKED: 0,
     CLICKED: 1,
     RIGHTCLICKED: -1
-}
+};
 
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
