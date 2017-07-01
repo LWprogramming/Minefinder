@@ -26,6 +26,7 @@ Other assorted things (no set timeline)
 - refactor generateGameBoard to take parameters instead of relying on global variables numRows, numCols, and numMines.
 - this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 - add a game timer
+- add a countdown for the number of mines
 - add game statistics (that can be reset of course) and leaderboard
 - support chording--look up minesweeper wiki for this.
 - make the website independent of browser, version, mobile vs desktop, etc.
