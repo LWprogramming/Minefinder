@@ -38,6 +38,10 @@ var cellStatusEnum = {
     RIGHTCLICKED: -1
 };
 
+var UNCLICKED_COLOR = 'white';
+var RIGHT_CLICKED_COLOR = 'red';
+var LEFT_CLICKED_COLOR = 'cyan';
+
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
     this.row = row;
@@ -104,7 +108,9 @@ for (var row = 0; row < numRows; row++) {
         button.typeName = 'button';
         button.innerHTML = '.';
         button.className = 'button col-xs-' + 12 / numCols;
-        button.style.background = 'white';
+        if (DEBUG) {
+            button.style.background = UNCLICKED_COLOR;
+        }
         // button.row = row;
         // button.colum = col; // COORDINATE
 
@@ -117,7 +123,7 @@ for (var row = 0; row < numRows; row++) {
             }
             gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
             if (DEBUG) {
-                this.style.background = 'cyan';
+                this.style.background = LEFT_CLICKED_COLOR;
             }
             if (gameBoard[thisRow][thisCol].mineStatus == 0) {
                 // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.
@@ -179,12 +185,14 @@ for (var row = 0; row < numRows; row++) {
                 if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
                     gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
                     if (DEBUG) {
-                        this.style.background = 'red';
+                        this.style.background = RIGHT_CLICKED_COLOR;
                     }
                 }
                 else if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
                     gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
-                    this.style.background = 'white';
+                    if (DEBUG) {
+                        this.style.background = UNCLICKED_COLOR;
+                    }
                 }
                     
             }
