@@ -53,9 +53,12 @@ var cellStatusEnum = {
     RIGHTCLICKED: -1
 };
 
-var UNCLICKED_COLOR = 'white';
-var RIGHT_CLICKED_COLOR = 'red';
-var LEFT_CLICKED_COLOR = 'cyan';
+if (DEBUG) {
+    var UNCLICKED_COLOR = 'white';
+    var RIGHT_CLICKED_COLOR = 'green';
+    var LEFT_CLICKED_COLOR = 'cyan';
+    var CLICKED_MINE_COLOR = 'red';
+}
 
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
@@ -197,6 +200,8 @@ for (var row = 0; row < numRows; row++) {
                 if (DEBUG) {
                     console.log("Game over!");
                 }
+                document.getElementById('button' + thisRow + thisCol).style.background = CLICKED_MINE_COLOR; // COORDINATE
+                // Change the content to the picture of a mine. TODO
             }
         }
 
