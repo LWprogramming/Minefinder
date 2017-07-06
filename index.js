@@ -54,6 +54,8 @@ var cellStatusEnum = {
     RIGHTCLICKED: -1
 };
 
+var IS_MINE: -1;
+
 if (DEBUG) {
     var UNCLICKED_COLOR = 'white';
     var RIGHT_CLICKED_COLOR = 'green';
@@ -97,14 +99,14 @@ function generateGameBoard() {
     for (var i = 0; i < numMines; i++){
         var row = Math.floor(Math.random() * numRows);
         var col = Math.floor(Math.random() * numCols);
-        gameBoard[row][col].mineStatus = -1;
+        gameBoard[row][col].mineStatus = IS_MINE;
         mineLocations.push(new cell(row, col));
     }
 
     // assign numbers to non-numerical cells
     for (var row = 0; row < numRows; row++) {
         for (var col = 0; col < numCols; col++) {
-            if (gameBoard[row][col].mineStatus != -1) {
+            if (gameBoard[row][col].mineStatus != IS_MINE) {
                 // If the given cell doesn't have a mine, then we need the number of mines around it.
                 gameBoard[row][col].mineStatus = numAdjacent(row, col, mineLocations);
             }
@@ -188,7 +190,7 @@ for (var row = 0; row < numRows; row++) {
                     }
                 }
             }
-            if (gameBoard[thisRow][thisCol].mineStatus == -1) {
+            if (gameBoard[thisRow][thisCol].mineStatus == IS_MINE) {
                 // clicked a mine
 
                 /*
@@ -206,7 +208,7 @@ for (var row = 0; row < numRows; row++) {
                     for (var col = 0; col < numCols; col++) {
                         var currentButton = document.getElementById('button' + row + col); // COORDINATE
                         currentButton.disabled = true; // disable clicking after the game
-                        if (gameBoard[row][col].mineStatus != -1 && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
+                        if (gameBoard[row][col].mineStatus != IS_MINE && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
                             // flagged but not a mine
                             if (DEBUG) {
                                 document.getElementById('button' + thisRow + thisCol).innerHTML = "+";
@@ -255,7 +257,7 @@ for (var row = 0; row < numRows; row++) {
 for (var row = 0; row < numRows; row++) {
     for (var col = 0; col < numCols; col++) {
         var symbol;
-        if (gameBoard[row][col].mineStatus != -1) {
+        if (gameBoard[row][col].mineStatus != IS_MINE) {
             symbol = '' + gameBoard[row][col].mineStatus;
         }
         else {
