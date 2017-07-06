@@ -20,6 +20,7 @@ Finally, put a GAME OVER sign somewhere.
 
 /*
 Other assorted things (no set timeline)
+- things marked PROD, aka things to be done when no longer in debug mode.
 - add difficulty settings (easy medium hard) as presets
 - allow user to input their choice of dimensions and number of mines. put in some sort of limit on this, though--can't support 9 million cells, for instance. also put in a check so that the number of mines doesn't exceed the number of cells.
 - refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
@@ -190,18 +191,37 @@ for (var row = 0; row < numRows; row++) {
             if (gameBoard[thisRow][thisCol].mineStatus == -1) {
                 // clicked a mine
 
+                /*
+                Game over logic:
+                Set the clicked mine to be in red.
+                
+                Then for every other cell c:
+                set button to disabled. No more clicks should register.
+                if c has a number but is flagged, insert the icon that indicates incorrect flagging.
+                if c has a mine and is not flagged, reveal it (i.e. add the icon that indicates mine, but do not click it and do not set background to red).
+                if c has a number and is not flagged, skip over it. only leave the cells that were already clicked.
+                */
                 // since once a cell is left-clicked, you can't unclick it, so we can simply reveal all cells just by left-clicking it.
                 for (var row = 0; row < numRows; row++) {
                     for (var col = 0; col < numCols; col++) {
-                        document.getElementById('button' + row + col).onclick(); // COORDINATE
+                        var currentButton = document.getElementById('button' + row + col); // COORDINATE
+                        currentButton.disabled = true; // disable clicking after the game
+                        if (gameBoard[row][col].mineStatus != -1 && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
+                            // flagged but not a mine
+                            if (DEBUG) {
+                                document.getElementById('button' + thisRow + thisCol).innerHTML = "+";
+                            }
+                            // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
+                        }
                     }
                 }
 
                 if (DEBUG) {
                     console.log("Game over!");
                 }
+
                 document.getElementById('button' + thisRow + thisCol).style.background = CLICKED_MINE_COLOR; // COORDINATE
-                // Change the content to the picture of a mine. TODO
+                // Change the content to the picture of a mine. PROD
             }
         }
 
