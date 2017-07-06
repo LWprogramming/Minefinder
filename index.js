@@ -54,7 +54,7 @@ var cellStatusEnum = {
     RIGHTCLICKED: -1
 };
 
-var IS_MINE: -1;
+var IS_MINE = -1;
 
 if (DEBUG) {
     var UNCLICKED_COLOR = 'white';
@@ -211,11 +211,11 @@ for (var row = 0; row < numRows; row++) {
                         if (gameBoard[row][col].mineStatus != IS_MINE && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
                             // flagged but not a mine
                             if (DEBUG) {
-                                document.getElementById('button' + thisRow + thisCol).innerHTML = "+";
+                                document.getElementById('button' + row + col).innerHTML = "+";
                             }
                             // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
                         }
-                        if (gameBoard[row][col].mineStatus == mineStatus.MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
+                        if (gameBoard[row][col].mineStatus == IS_MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
                             // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
                         }
 
