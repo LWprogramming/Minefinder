@@ -263,6 +263,10 @@ function setButtons(gameBoard) {
 }
 
 function startGame() {
+    // clean out the old stuff
+    var grid = document.getElementById('grid');
+    while (gridChildren.firstChild)
+        
     var gameBoard = generateGameBoard();
     setButtons(gameBoard);
 }
