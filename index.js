@@ -215,6 +215,10 @@ for (var row = 0; row < numRows; row++) {
                             }
                             // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
                         }
+                        if (gameBoard[row][col].mineStatus == mineStatus.MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
+                            // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
+                        }
+
                     }
                 }
 
