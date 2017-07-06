@@ -203,7 +203,7 @@ for (var row = 0; row < numRows; row++) {
                 if c has a mine and is not flagged, reveal it (i.e. add the icon that indicates mine, but do not click it and do not set background to red).
                 if c has a number and is not flagged, skip over it. only leave the cells that were already clicked.
                 */
-                // since once a cell is left-clicked, you can't unclick it, so we can simply reveal all cells just by left-clicking it.
+
                 for (var row = 0; row < numRows; row++) {
                     for (var col = 0; col < numCols; col++) {
                         var currentButton = document.getElementById('button' + row + col); // COORDINATE
@@ -216,9 +216,9 @@ for (var row = 0; row < numRows; row++) {
                             // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
                         }
                         if (gameBoard[row][col].mineStatus == IS_MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
+                            // unflagged mine
                             // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
                         }
-
                     }
                 }
 
@@ -228,6 +228,10 @@ for (var row = 0; row < numRows; row++) {
 
                 document.getElementById('button' + thisRow + thisCol).style.background = CLICKED_MINE_COLOR; // COORDINATE
                 // Change the content to the picture of a mine. PROD
+
+                var gameOver = document.createElement('p');
+                gameOver.innerHTML = "Game over!";
+                document.body.appendChild(gameOver);
             }
         }
 
