@@ -101,162 +101,170 @@ function generateGameBoard() {
     return gameBoard;
 }
 
-var gameBoard = generateGameBoard();
-
-// Put together game board.
-for (var row = 0; row < numRows; row++) {
-    var divRow = document.createElement('div');
-    divRow.className = 'row';
-    for (var col = 0; col < numCols; col++) {
-        var button = document.createElement('button');
-        button.id = 'button' + row + col;
-        // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
-        // https://stackoverflow.com/a/16775485
-        button.typeName = 'button';
-        button.innerHTML = '.';
-        button.className = 'button col-xs-' + 12 / numCols;
-        if (DEBUG) {
-            button.style.background = UNCLICKED_COLOR;
-        }
-        // button.row = row;
-        // button.colum = col; // COORDINATE
-
-        // left-click logic
-        button.onclick = function(event) {
-            var thisRow = parseInt(this.id[6]); // COORDINATE
-            var thisCol = parseInt(this.id[7]); // COORDINATE
-            if (gameBoard[thisRow][thisCol].status != cellStatusEnum.UNCLICKED) {
-                return; // can't click unless the cell is in its UNCLICKED state.
-            }
-            gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
+function setButtons(gameBoard) {
+    // Put together game board.
+    for (var row = 0; row < numRows; row++) {
+        var divRow = document.createElement('div');
+        divRow.className = 'row';
+        for (var col = 0; col < numCols; col++) {
+            var button = document.createElement('button');
+            button.id = 'button' + row + col;
+            // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
+            // https://stackoverflow.com/a/16775485
+            button.typeName = 'button';
+            button.innerHTML = '.';
+            button.className = 'button col-xs-' + 12 / numCols;
+            button.disabled = false; // for restarting games.
             if (DEBUG) {
-                this.style.background = LEFT_CLICKED_COLOR;
+                button.style.background = UNCLICKED_COLOR;
             }
-            if (gameBoard[thisRow][thisCol].mineStatus == 0) {
-                // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.
-                var adjacentCellsList = []; // list of cells adjacent to current cell.
-                if (thisRow != 0) {
-                    if (thisCol != 0) {
-                        // upper left exists
-                        adjacentCellsList.push([thisRow - 1, thisCol - 1]);
-                    }
-                    if (thisCol != numCols - 1) {
-                        // upper right exists
-                        adjacentCellsList.push([thisRow - 1, thisCol + 1]);
-                    }
-                    // cell directly above exists
-                    adjacentCellsList.push([thisRow - 1, thisCol]);
-                }
-                if (thisRow != numRows - 1) {
-                    if (thisCol != 0) {
-                        // lower left exists
-                        adjacentCellsList.push([thisRow + 1, thisCol - 1]);
-                    }
-                    if (thisCol != numCols - 1) {
-                        // lower right exists
-                        adjacentCellsList.push([thisRow + 1, thisCol + 1]);
-                    }
-                    // cell directly below exists
-                    adjacentCellsList.push([thisRow + 1, thisCol]);
-                }
-                if (thisCol != 0) {
-                    // cell to left exists
-                    adjacentCellsList.push([thisRow, thisCol - 1]);
-                }
-                if (thisCol != numCols - 1) {
-                    // cell to right exists
-                    adjacentCellsList.push([thisRow, thisCol + 1]);
-                }
-                for (var i = 0; i < adjacentCellsList.length; i++) {
-                    adjCell = adjacentCellsList[i];
-                    var adjRow = adjCell[0];
-                    var adjCol = adjCell[1];
-                    if (gameBoard[adjRow][adjCol].status == cellStatusEnum.UNCLICKED) {
-                        document.getElementById('button' + adjRow + adjCol).onclick(); // COORDINATE
-                    }
-                }
-            }
-            if (gameBoard[thisRow][thisCol].mineStatus == IS_MINE) {
-                // clicked a mine
+            // button.row = row;
+            // button.colum = col; // COORDINATE
 
-                /*
-                Game over logic:
-                Set the clicked mine to be in red.
-                
-                Then for every other cell c:
-                set button to disabled. No more clicks should register.
-                if c has a number but is flagged, insert the icon that indicates incorrect flagging.
-                if c has a mine and is not flagged, reveal it (i.e. add the icon that indicates mine, but do not click it and do not set background to red).
-                if c has a number and is not flagged, skip over it. only leave the cells that were already clicked.
-                */
-
-                for (var row = 0; row < numRows; row++) {
-                    for (var col = 0; col < numCols; col++) {
-                        var currentButton = document.getElementById('button' + row + col); // COORDINATE
-                        currentButton.disabled = true; // disable clicking after the game
-                        if (gameBoard[row][col].mineStatus != IS_MINE && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
-                            // flagged but not a mine
-                            if (DEBUG) {
-                                document.getElementById('button' + row + col).innerHTML = "+";
-                            }
-                            // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
-                        }
-                        if (gameBoard[row][col].mineStatus == IS_MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
-                            // unflagged mine
-                            // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
-                        }
-                    }
-                }
-
-                if (DEBUG) {
-                    console.log("Game over!");
-                }
-
-                document.getElementById('button' + thisRow + thisCol).style.background = CLICKED_MINE_COLOR; // COORDINATE
-                // Change the content to the picture of a mine. PROD
-
-                var gameOver = document.createElement('p');
-                gameOver.innerHTML = "Game over!";
-                document.body.appendChild(gameOver);
-            }
-        }
-
-        // right-click logic
-        button.onmouseup = function(event) {
-            if (event.which == 3) {
+            // left-click logic
+            button.onclick = function(event) {
                 var thisRow = parseInt(this.id[6]); // COORDINATE
                 var thisCol = parseInt(this.id[7]); // COORDINATE
-                if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
-                    gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
-                    if (DEBUG) {
-                        this.style.background = RIGHT_CLICKED_COLOR;
+                if (gameBoard[thisRow][thisCol].status != cellStatusEnum.UNCLICKED) {
+                    return; // can't click unless the cell is in its UNCLICKED state.
+                }
+                gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
+                if (DEBUG) {
+                    this.style.background = LEFT_CLICKED_COLOR;
+                }
+                if (gameBoard[thisRow][thisCol].mineStatus == 0) {
+                    // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.
+                    var adjacentCellsList = []; // list of cells adjacent to current cell.
+                    if (thisRow != 0) {
+                        if (thisCol != 0) {
+                            // upper left exists
+                            adjacentCellsList.push([thisRow - 1, thisCol - 1]);
+                        }
+                        if (thisCol != numCols - 1) {
+                            // upper right exists
+                            adjacentCellsList.push([thisRow - 1, thisCol + 1]);
+                        }
+                        // cell directly above exists
+                        adjacentCellsList.push([thisRow - 1, thisCol]);
+                    }
+                    if (thisRow != numRows - 1) {
+                        if (thisCol != 0) {
+                            // lower left exists
+                            adjacentCellsList.push([thisRow + 1, thisCol - 1]);
+                        }
+                        if (thisCol != numCols - 1) {
+                            // lower right exists
+                            adjacentCellsList.push([thisRow + 1, thisCol + 1]);
+                        }
+                        // cell directly below exists
+                        adjacentCellsList.push([thisRow + 1, thisCol]);
+                    }
+                    if (thisCol != 0) {
+                        // cell to left exists
+                        adjacentCellsList.push([thisRow, thisCol - 1]);
+                    }
+                    if (thisCol != numCols - 1) {
+                        // cell to right exists
+                        adjacentCellsList.push([thisRow, thisCol + 1]);
+                    }
+                    for (var i = 0; i < adjacentCellsList.length; i++) {
+                        adjCell = adjacentCellsList[i];
+                        var adjRow = adjCell[0];
+                        var adjCol = adjCell[1];
+                        if (gameBoard[adjRow][adjCol].status == cellStatusEnum.UNCLICKED) {
+                            document.getElementById('button' + adjRow + adjCol).onclick(); // COORDINATE
+                        }
                     }
                 }
-                else if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
-                    gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
-                    if (DEBUG) {
-                        this.style.background = UNCLICKED_COLOR;
-                    }
-                }
+                if (gameBoard[thisRow][thisCol].mineStatus == IS_MINE) {
+                    // clicked a mine
+
+                    /*
+                    Game over logic:
+                    Set the clicked mine to be in red.
                     
+                    Then for every other cell c:
+                    set button to disabled. No more clicks should register.
+                    if c has a number but is flagged, insert the icon that indicates incorrect flagging.
+                    if c has a mine and is not flagged, reveal it (i.e. add the icon that indicates mine, but do not click it and do not set background to red).
+                    if c has a number and is not flagged, skip over it. only leave the cells that were already clicked.
+                    */
+
+                    for (var row = 0; row < numRows; row++) {
+                        for (var col = 0; col < numCols; col++) {
+                            var currentButton = document.getElementById('button' + row + col); // COORDINATE
+                            currentButton.disabled = true; // disable clicking after the game
+                            if (gameBoard[row][col].mineStatus != IS_MINE && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
+                                // flagged but not a mine
+                                if (DEBUG) {
+                                    document.getElementById('button' + row + col).innerHTML = "+";
+                                }
+                                // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
+                            }
+                            if (gameBoard[row][col].mineStatus == IS_MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
+                                // unflagged mine
+                                // PROD : INSERT ICON THAT INDICATES INCORRECT FLAGGING
+                            }
+                        }
+                    }
+
+                    if (DEBUG) {
+                        console.log("Game over!");
+                    }
+
+                    document.getElementById('button' + thisRow + thisCol).style.background = CLICKED_MINE_COLOR; // COORDINATE
+                    // Change the content to the picture of a mine. PROD
+
+                    var gameOver = document.createElement('p');
+                    gameOver.innerHTML = "Game over!";
+                    document.body.appendChild(gameOver);
+                }
             }
-        }
 
-        divRow.appendChild(button);
+            // right-click logic
+            button.onmouseup = function(event) {
+                if (event.which == 3) {
+                    var thisRow = parseInt(this.id[6]); // COORDINATE
+                    var thisCol = parseInt(this.id[7]); // COORDINATE
+                    if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
+                        gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
+                        if (DEBUG) {
+                            this.style.background = RIGHT_CLICKED_COLOR;
+                        }
+                    }
+                    else if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
+                        gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
+                        if (DEBUG) {
+                            this.style.background = UNCLICKED_COLOR;
+                        }
+                    }
+                        
+                }
+            }
+
+            divRow.appendChild(button);
+        }
+        document.getElementById('grid').appendChild(divRow);
     }
-    document.getElementById('grid').appendChild(divRow);
+
+    // fill out each button with the correct content.
+    for (var row = 0; row < numRows; row++) {
+        for (var col = 0; col < numCols; col++) {
+            var symbol;
+            if (gameBoard[row][col].mineStatus != IS_MINE) {
+                symbol = '' + gameBoard[row][col].mineStatus;
+            }
+            else {
+                symbol = "*"; // for mines
+            }
+            document.getElementById('button' + row + col).innerHTML = symbol; //COORDINATE
+        }
+    }
 }
 
-// fill out each button with the correct content.
-for (var row = 0; row < numRows; row++) {
-    for (var col = 0; col < numCols; col++) {
-        var symbol;
-        if (gameBoard[row][col].mineStatus != IS_MINE) {
-            symbol = '' + gameBoard[row][col].mineStatus;
-        }
-        else {
-            symbol = "*"; // for mines
-        }
-        document.getElementById('button' + row + col).innerHTML = symbol; //COORDINATE
-    }
+function startGame() {
+    var gameBoard = generateGameBoard();
+    setButtons(gameBoard);
 }
+
+startGame();
