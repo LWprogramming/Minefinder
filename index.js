@@ -1,22 +1,8 @@
 //TODO FOR NEXT TIME:
 // 1. [DONE] implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
 // 2. [DONE] Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
-// 3. [WIP] [Need to figure out logic for each cell.
-/*
-Logic is as follows, upon clicking a mine:
-take the current mine that was clicked and set the background to red. add the mine icon to that cell.
-
-Then, go through each cell and for each, follow the following logic
-for the given cell, set button to disabled. https://stackoverflow.com/questions/16777003/what-is-the-easiest-way-to-disable-enable-buttons-and-links-jquery-bootstrap/16788240#16788240
-if a given cell is a number and is not flagged, skip over it. only leave the cells that were already clicked.
-if a given cell is a number but is flagged, insert the icon that indicates incorrect flagging.
-if a given cell has a mine and is not flagged, reveal it (i.e. add the icon that indicates mine, but do not click it and do not set background to red).
-
-Finally, put a GAME OVER sign somewhere. 
-*/
-
-//implement logic to stop the game if a mine is clicked. also display a game-over message. 
-// 4. add reset button that can be clicked at any time. erases the game over message.
+// 3. [DONE] Need to figure out logic for each cell.
+// 4. [WIP] add reset button that can be clicked at any time. erases the game over message.
 
 /*
 Other assorted things (no set timeline)
