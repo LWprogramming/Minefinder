@@ -1,6 +1,7 @@
 //TODO FOR NEXT TIME:
-// add difficulty settings (easy medium hard custom) as presets
+// debug weird issue in medium and hard mode where some cells are not reached for some reason, leading to buggy behavior. maybe has something to do with the number of mines? need to look at carefully.
 // WIP-- need to make sure in custom mode, there aren't too many mines for any given board size, and also that there aren't too many cells in general.
+// create way for user to enter custom difficulties
 
 
 
