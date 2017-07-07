@@ -2,7 +2,7 @@
 // 1. [DONE] implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
 // 2. [DONE] Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
 // 3. [DONE] Need to figure out logic for each cell.
-// 4. [WIP] add reset button that can be clicked at any time. erases the game over message.
+// 4. [DONE] add reset button that can be clicked at any time. 
 
 /*
 Other assorted things (no set timeline)
