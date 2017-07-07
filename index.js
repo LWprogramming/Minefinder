@@ -28,10 +28,10 @@ jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
 var DEBUG = true;
 
 var difficulty = {
-    EASY: 1,
-    MEDIUM: 2, 
-    HARD: 3,
-    CUSTOM: 0
+    EASY: 'easy',
+    MEDIUM: 'medium', 
+    HARD: 'hard',
+    CUSTOM: 'custom'
 };
 
 var currentDifficulty = difficulty.EASY; // default to easy
@@ -91,7 +91,6 @@ function generateGameBoard(numRows, numCols, numMines) {
         gameBoard[row][col].mineStatus = IS_MINE;
         mineLocations.push(new cell(row, col));
     }
-
     // assign numbers to non-numerical cells
     for (var row = 0; row < numRows; row++) {
         for (var col = 0; col < numCols; col++) {
@@ -264,7 +263,7 @@ function setButtons(gameBoard) {
     }
 }
 
-function startGame(currentDifficulty, customRows=-1, customCols=-1, customMines=-1) {
+function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) {
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
@@ -273,7 +272,7 @@ function startGame(currentDifficulty, customRows=-1, customCols=-1, customMines=
     }
 
     // board parameters
-    switch (currentDifficulty) {
+    switch (newDifficulty) {
         case difficulty.EASY:
             var numRows = 8;
             var numCols = 8;
@@ -283,15 +282,18 @@ function startGame(currentDifficulty, customRows=-1, customCols=-1, customMines=
             var numRows = 16;
             var numCols = 16;
             var numMines = 40;
+            break;
         case difficulty.HARD:
             var numRows = 24;
             var numCols = 24;
             var numMines = 99;
+            break;
         case difficulty.CUSTOM:
             // in this case, the number of rows, columns, and mines are custom-set.
             var numRows = customRows;
             var numCols = customCols;
             var numMines = customMines;
+            break;
         default:
             // TODO: insert some error handling here--shouldn't ever happen but just in case 
             break;
