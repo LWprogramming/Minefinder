@@ -296,6 +296,7 @@ function startGame(currentDifficulty, customRows=-1, customCols=-1, customMines=
             var numCols = customCols;
             var numMines = customMines;
         default:
+            // TODO: insert some error handling here--shouldn't ever happen but just in case 
             break;
     }
     // build everything back up.
