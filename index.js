@@ -34,7 +34,7 @@ var difficulty = {
     CUSTOM: 'custom'
 };
 
-var currentDifficulty = difficulty.EASY; // default to easy
+var currentDifficulty = difficulty.MEDIUM; // default to easy
 
 // cell status must be one of these.
 var cellStatusEnum = {
