@@ -214,11 +214,6 @@ function setButtons(gameBoard) {
 
                     document.getElementById('button' + thisRow + thisCol).style.background = CLICKED_MINE_COLOR; // COORDINATE
                     // Change the content to the picture of a mine. PROD
-
-                    var gameOver = document.createElement('p');
-                    gameOver.innerHTML = "Game over!";
-                    gameOver.id = 'game over';
-                    document.body.appendChild(gameOver);
                 }
             }
 
