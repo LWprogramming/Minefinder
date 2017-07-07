@@ -1,8 +1,4 @@
 //TODO FOR NEXT TIME:
-// 1. [DONE] implement logic for clicking a cell with a 0--i.e. reveal all its neighbors recursively so that for any of its neighbors that are zero, reveal all of their neighbors as well.
-// 2. [DONE] Implement right-click logic. Legal transitions are: unclicked to rightclicked, rightclicked to unclicked, uncliked to clicked. 
-// 3. [DONE] Need to figure out logic for each cell.
-// 4. [DONE] add reset button that can be clicked at any time. 
 // add difficulty settings (easy medium hard custom) as presets
 // WIP-- need to make sure in custom mode, there aren't too many mines for any given board size, and also that there aren't too many cells in general.
 
@@ -12,9 +8,7 @@
 /*
 Other assorted things (no set timeline)
 - things marked PROD, aka things to be done when no longer in debug mode.
-- allow user to input their choice of dimensions and number of mines. put in some sort of limit on this, though--can't support 9 million cells, for instance. also put in a check so that the number of mines doesn't exceed the number of cells.
 - refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
-- refactor generateGameBoard to take parameters instead of relying on global variables numRows, numCols, and numMines.
 - this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 - add a game timer
 - add a countdown for the number of mines
