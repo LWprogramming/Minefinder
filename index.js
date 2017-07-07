@@ -80,7 +80,7 @@ function numAdjacent(row, col, mineLocations) {
 }
 
 /* Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols. */
-function generateGameBoard() {
+function generateGameBoard(numRows, numCols, numMines) {
     var gameBoard = [];
     for (var row = 0; row < numRows; row++) {
         var rowArray = [];
@@ -112,6 +112,9 @@ function generateGameBoard() {
 
 function setButtons(gameBoard) {
     // Put together game board.
+    var numRows = gameBoard.length;
+    var numCols = gameBoard[0].length;
+
     for (var row = 0; row < numRows; row++) {
         var divRow = document.createElement('div');
         divRow.className = 'row';
@@ -300,8 +303,8 @@ function startGame(currentDifficulty, customRows=-1, customCols=-1, customMines=
             break;
     }
     // build everything back up.
-    var gameBoard = generateGameBoard();
+    var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
 }
 
-startGame();
+startGame(currentDifficulty);
