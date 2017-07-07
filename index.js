@@ -34,10 +34,10 @@ jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
 var DEBUG = true;
 
 var difficulty = {
-    EASY,
-    MEDIUM, 
-    HARD,
-    CUSTOM
+    EASY: 1,
+    MEDIUM: 2, 
+    HARD: 3,
+    CUSTOM: 0
 };
 
 var currentDifficulty = difficulty.EASY; // default to easy
