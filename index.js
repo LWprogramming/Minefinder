@@ -110,7 +110,7 @@ function generateGameBoard(numRows, numCols, numMines) {
         if (gameBoard[row][col].mineStatus != IS_MINE) {
             gameBoard[row][col].mineStatus = IS_MINE;
             mineLocations.push(new cell(row, col));
-            numMinesSoFar++;      
+            numMinesSoFar++;
         }
     }
     // assign numbers to non-numerical cells
