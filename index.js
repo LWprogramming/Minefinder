@@ -39,7 +39,7 @@ var difficulty = {
     CUSTOM: 'custom'
 };
 
-var currentDifficulty = difficulty.MEDIUM; // default to easy
+var currentDifficulty = difficulty.MEDIUM;
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -88,13 +88,30 @@ function generateGameBoard(numRows, numCols, numMines) {
         }
         gameBoard.push(rowArray);
     }
+
+    //test code
+    // for (var row = 0; row < numRows; row++) {
+    //     for (var col = 0; col < numCols; col++) {
+    //         if (gameBoard[row][col].row != row) {
+    //             console.log('row mismatch at row ' + row + ' and col ' + col);
+    //         }
+    //         if (gameBoard[row][col].col != col) {
+    //             console.log('row mismatch at row ' + row + ' and col ' + col);
+    //         }
+    //     }
+    // }
+
     // generate random locations for mines.
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
-    for (var i = 0; i < numMines; i++){
+    var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
+    while (numMinesSoFar < numMines) {    
         var row = Math.floor(Math.random() * numRows);
         var col = Math.floor(Math.random() * numCols);
-        gameBoard[row][col].mineStatus = IS_MINE;
-        mineLocations.push(new cell(row, col));
+        if (gameBoard[row][col].mineStatus != IS_MINE) {
+            gameBoard[row][col].mineStatus = IS_MINE;
+            mineLocations.push(new cell(row, col));
+            numMinesSoFar++;      
+        }
     }
     // assign numbers to non-numerical cells
     for (var row = 0; row < numRows; row++) {
@@ -305,6 +322,29 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
     }
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);
+    
+    // test to confirm that gameboard is correctly setup
+    var numberOfMines = 0;
+    var numberOfSafeCells = 0;
+    for (var row = 0; row < numRows; row++) {
+        for (var col = 0; col < numCols; col++) {
+            if (gameBoard[row][col].mineStatus == IS_MINE) {
+                numberOfMines++;
+            }
+            else {
+                numberOfSafeCells++;
+            }
+        }
+    }
+
+    //test code
+    console.log('number of mines: ' + numberOfMines);
+    console.log('number of mines should be ' + numMines);
+    console.log('numberOfSafeCells: ' + numberOfSafeCells);
+    console.log('numberOfSafeCells should be ' + (numRows * numCols - numMines));
+    console.log('total cells' + (numberOfMines + numberOfSafeCells));
+    console.log('total cells should be ' + (numRows * numCols));
+    
     setButtons(gameBoard);
 }
 
