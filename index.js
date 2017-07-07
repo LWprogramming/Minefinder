@@ -217,6 +217,7 @@ function setButtons(gameBoard) {
 
                     var gameOver = document.createElement('p');
                     gameOver.innerHTML = "Game over!";
+                    gameOver.id = 'game over';
                     document.body.appendChild(gameOver);
                 }
             }
@@ -263,10 +264,14 @@ function setButtons(gameBoard) {
 }
 
 function startGame() {
-    // clean out the old stuff
+    // clean out the old stuff, removing all buttons
+    // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
-    while (gridChildren.firstChild)
-        
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
+
+    // build everything back up.
     var gameBoard = generateGameBoard();
     setButtons(gameBoard);
 }
