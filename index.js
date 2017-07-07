@@ -28,10 +28,15 @@ var jsDisabledMessage = document.getElementById("Javascript disabled message");
 jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
 
 var DEBUG = true;
-// game parameters
-var numRows = 6;
-var numCols = 6;
-var numMines = 5;
+
+var difficulty = {
+    EASY,
+    MEDIUM, 
+    HARD,
+    CUSTOM
+};
+
+var currentDifficulty = difficulty.EASY; // default to easy
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -258,7 +263,7 @@ function setButtons(gameBoard) {
     }
 }
 
-function startGame() {
+function startGame(currentDifficulty, customRows=-1, customCols=-1, customMines=-1) {
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
@@ -266,6 +271,29 @@ function startGame() {
         grid.removeChild(grid.firstChild);
     }
 
+    // board parameters
+    switch (currentDifficulty) {
+        case difficulty.EASY:
+            var numRows = 8;
+            var numCols = 8;
+            var numMines = 10;
+            break;
+        case difficulty.MEDIUM:
+            var numRows = 16;
+            var numCols = 16;
+            var numMines = 40;
+        case difficulty.HARD:
+            var numRows = 24;
+            var numCols = 24;
+            var numMines = 99;
+        case difficulty.CUSTOM:
+            // in this case, the number of rows, columns, and mines are custom-set.
+            var numRows = customRows;
+            var numCols = customCols;
+            var numMines = customMines;
+        default:
+            break;
+    }
     // build everything back up.
     var gameBoard = generateGameBoard();
     setButtons(gameBoard);
