@@ -11,7 +11,12 @@
     <div class='container-fluid' id='grid'></div>
     <p id='Javascript disabled message'>If you are seeing this message, you probably have Javascript disabled. Please enable it to see the page!</p>
     <!-- TODO: maybe have _some_ other content so that if not using javascript, the page is not almost a blank. -->
-    <button id='restart' onclick="startGame(currentDifficulty)">Restart Game</button>
+    <div class='row'>
+        <button id='restart' onclick="startGame(currentDifficulty)">Restart Game</button>
+        <button id='easy' onclick="startGame(difficulty.EASY)">Easy</button>
+        <button id='medium' onclick="startGame(difficulty.MEDIUM)">Medium</button>
+        <button id='hard' onclick="startGame(difficulty.HARD)">Hard</button>
+    </div>
     <script src="index.js"></script>
 </body>
 </html>
