@@ -319,6 +319,9 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
     }
 
     // board parameters
+    if (newDifficulty != difficulty.CUSTOM) {
+        currentDifficulty = newDifficulty;
+    }
     switch (newDifficulty) {
         case difficulty.EASY:
             var numRows = 8;
