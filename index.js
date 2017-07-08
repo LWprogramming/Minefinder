@@ -39,7 +39,7 @@ var difficulty = {
     CUSTOM: 'custom'
 };
 
-var currentDifficulty = difficulty.MEDIUM;
+var currentDifficulty = difficulty.EASY;
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -319,6 +319,7 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
     }
 
     // board parameters
+    // console.log(currentDifficulty);
     if (newDifficulty != difficulty.CUSTOM) {
         currentDifficulty = newDifficulty;
     }
@@ -349,22 +350,8 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
             break;
     }
     // build everything back up.
-    var gameBoard = generateGameBoard(numRows, numCols, numMines);
-    
-    // test to confirm that gameboard is correctly setup
-    var numberOfMines = 0;
-    var numberOfSafeCells = 0;
-    for (var row = 0; row < numRows; row++) {
-        for (var col = 0; col < numCols; col++) {
-            if (gameBoard[row][col].mineStatus == IS_MINE) {
-                numberOfMines++;
-            }
-            else {
-                numberOfSafeCells++;
-            }
-        }
-    }    
-    setButtons(gameBoard);
+    var gameBoard = generateGameBoard(numRows, numCols, numMines);    
+    setButtons(gameBoard);  
 }
 
 startGame(currentDifficulty);
