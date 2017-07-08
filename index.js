@@ -285,18 +285,20 @@ function setButtons(gameBoard) {
                             this.style.background = RIGHT_CLICKED_COLOR;
                         }
                     }
-                    else if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
-                        gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
-                        document.getElementById('numMinesRemainingNumber').innerHTML = ++numMinesRemaining;
-                        
-                        // remove the easter egg message if the player removes some mines so that the number of mines goes from -1 to 0, in which case the easter egg message no longer makes sense.
-                        if (numMinesRemaining = 0) {
-                            var negativeMinesLeftParent = document.getElementById('negativeMinesLeftParent');
-                            negativeMinesLeftParent.removeChild(negativeMinesLeftParent.firstChild);
-                        }
+                    else {
+                        if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
+                            gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
+                            document.getElementById('numMinesRemainingNumber').innerHTML = ++numMinesRemaining;
+                            
+                            // remove the easter egg message if the player removes some mines so that the number of mines goes from -1 to 0, in which case the easter egg message no longer makes sense.
+                            if (numMinesRemaining = 0) {
+                                var negativeMinesLeftParent = document.getElementById('negativeMinesLeftParent');
+                                negativeMinesLeftParent.removeChild(negativeMinesLeftParent.firstChild);
+                            }
 
-                        if (DEBUG) {
-                            this.style.background = UNCLICKED_COLOR;
+                            if (DEBUG) {
+                                this.style.background = UNCLICKED_COLOR;
+                            }
                         }
                     }
                         
