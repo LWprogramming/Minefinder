@@ -140,6 +140,17 @@ function coordinatesFromButtonID(buttonID) {
     };
 }
 
+function revealCellContents(row, col, gameBoard) {
+    var symbol;
+    if (gameBoard[row][col].mineStatus != IS_MINE) {
+        symbol = '' + gameBoard[row][col].mineStatus;
+    }
+    else {
+        symbol = "*"; // for mines
+    }
+    document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = symbol; //COORDINATE
+}
+
 function setButtons(gameBoard) {
     // Put together game board.
     var numRows = gameBoard.length;
@@ -311,14 +322,7 @@ function setButtons(gameBoard) {
         // fill out each button with the correct content.
         for (var row = 0; row < numRows; row++) {
             for (var col = 0; col < numCols; col++) {
-                var symbol;
-                if (gameBoard[row][col].mineStatus != IS_MINE) {
-                    symbol = '' + gameBoard[row][col].mineStatus;
-                }
-                else {
-                    symbol = "*"; // for mines
-                }
-                document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = symbol; //COORDINATE
+                revealCellContents(row, col, gameBoard);
             }
         }
         
