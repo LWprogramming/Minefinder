@@ -1,15 +1,4 @@
 //TODO FOR NEXT TIME:
-// debug weird issue in medium and hard mode where some cells are not reached for some reason, leading to buggy behavior. maybe has something to do with the number of mines? need to look at carefully.
-// WIP-- need to make sure in custom mode, there aren't too many mines for any given board size, and also that there aren't too many cells in general.
-// create way for user to enter custom difficulties
-/*
-https://user-images.githubusercontent.com/13173037/27969838-81f7b83a-631a-11e7-9b96-4957681113f7.png
-
-Observe the bug with the squares labeled 2 on the lower right, but with 1 mine next to them, the square labeled 4 but has only 3 adjacent mines. May have to do with the other bug related to the gameboard on medium/ hard difficulty.
-*/
-
-
-
 /*
 Other assorted things (no set timeline)
 - things marked PROD, aka things to be done when no longer in debug mode.
