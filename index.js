@@ -291,7 +291,7 @@ function setButtons(gameBoard) {
                             document.getElementById('numMinesRemainingNumber').innerHTML = ++numMinesRemaining;
                             
                             // remove the easter egg message if the player removes some mines so that the number of mines goes from -1 to 0, in which case the easter egg message no longer makes sense.
-                            if (numMinesRemaining = 0) {
+                            if (numMinesRemaining == 0) {
                                 var negativeMinesLeftParent = document.getElementById('negativeMinesLeftParent');
                                 negativeMinesLeftParent.removeChild(negativeMinesLeftParent.firstChild);
                             }
@@ -300,8 +300,7 @@ function setButtons(gameBoard) {
                                 this.style.background = UNCLICKED_COLOR;
                             }
                         }
-                    }
-                        
+                    }                        
                 }
             }
 
