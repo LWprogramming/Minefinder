@@ -87,20 +87,7 @@ function generateGameBoard(numRows, numCols, numMines) {
             rowArray.push(new cell(row, col));
         }
         gameBoard.push(rowArray);
-    }
-
-    //test code
-    // for (var row = 0; row < numRows; row++) {
-    //     for (var col = 0; col < numCols; col++) {
-    //         if (gameBoard[row][col].row != row) {
-    //             console.log('row mismatch at row ' + row + ' and col ' + col);
-    //         }
-    //         if (gameBoard[row][col].col != col) {
-    //             console.log('row mismatch at row ' + row + ' and col ' + col);
-    //         }
-    //     }
-    // }
-
+        
     // generate random locations for mines.
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
     var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
@@ -373,16 +360,7 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
                 numberOfSafeCells++;
             }
         }
-    }
-
-    //test code
-    // console.log('number of mines: ' + numberOfMines);
-    // console.log('number of mines should be ' + numMines);
-    // console.log('numberOfSafeCells: ' + numberOfSafeCells);
-    // console.log('numberOfSafeCells should be ' + (numRows * numCols - numMines));
-    // console.log('total cells' + (numberOfMines + numberOfSafeCells));
-    // console.log('total cells should be ' + (numRows * numCols));
-    
+    }    
     setButtons(gameBoard);
 }
 
