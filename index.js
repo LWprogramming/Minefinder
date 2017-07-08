@@ -39,7 +39,7 @@ var difficulty = {
     CUSTOM: 'custom'
 };
 
-var currentDifficulty = difficulty.MEDIUM;
+var defaultDifficulty = difficulty.MEDIUM;
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -87,7 +87,7 @@ function generateGameBoard(numRows, numCols, numMines) {
             rowArray.push(new cell(row, col));
         }
         gameBoard.push(rowArray);
-        
+
     // generate random locations for mines.
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
     var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
@@ -364,4 +364,4 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
     setButtons(gameBoard);
 }
 
-startGame(currentDifficulty);
+startGame(defaultDifficulty);
