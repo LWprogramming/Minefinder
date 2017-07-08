@@ -186,6 +186,7 @@ function setButtons(gameBoard) {
                 if (DEBUG) {
                     this.style.background = LEFT_CLICKED_COLOR;
                 }
+                revealCellContents(thisRow, thisCol, gameBoard);
                 if (gameBoard[thisRow][thisCol].mineStatus == 0) {
                     // Clicked a cell with no mines next to it-- a zero. Then for each adjacent unclicked cell, click it.
                     var adjacentCellsList = []; // list of cells adjacent to current cell.
