@@ -308,18 +308,14 @@ function setButtons(gameBoard) {
     }
 
     // fill out each button with the correct content.
-    var numberOfSafeCells = 0;
-    var numberOfMines = 0;
     for (var row = 0; row < numRows; row++) {
         for (var col = 0; col < numCols; col++) {
             var symbol;
             if (gameBoard[row][col].mineStatus != IS_MINE) {
                 symbol = '' + gameBoard[row][col].mineStatus;
-                numberOfSafeCells++;
             }
             else {
                 symbol = "*"; // for mines
-                numberOfMines++;
             }
             document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = symbol; //COORDINATE
         }
