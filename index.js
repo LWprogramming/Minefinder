@@ -125,6 +125,38 @@ function generateGameBoard(numRows, numCols, numMines) {
     return gameBoard;
 }
 
+//COORDINATE
+// accounts for the fact that the row and column number for buttons, when that number gets to be two digits, bugs crop up.
+// returns a string that is the button id given numerical coordinates.
+function buttonIDFromCoordinates(row, col) {
+    var rowString = '';
+    var colString = '';
+    if (row < 10) {
+        rowString += '0' + row;
+    }
+    else {
+        rowString += row;
+    }
+    if (col < 10) {
+        colString += '0' + col;
+    }
+    else {
+        colString = col;
+    }
+    return 'button' + rowString + colString;
+}
+
+//COORDINATE
+// returns two key-value pairs with row and column information given button id string.
+function coordinatesFromButtonID(buttonID) {
+    var rowString = buttonID[6] + buttonID[7];
+    var colString = buttonID[8] + buttonID[9];
+    return {
+        row: parseInt(rowString),
+        col: parseInt(colString)
+    };
+}
+
 function setButtons(gameBoard) {
     // Put together game board.
     var numRows = gameBoard.length;
@@ -271,14 +303,18 @@ function setButtons(gameBoard) {
     }
 
     // fill out each button with the correct content.
+    var numberOfSafeCells = 0;
+    var numberOfMines = 0;
     for (var row = 0; row < numRows; row++) {
         for (var col = 0; col < numCols; col++) {
             var symbol;
             if (gameBoard[row][col].mineStatus != IS_MINE) {
                 symbol = '' + gameBoard[row][col].mineStatus;
+                numberOfSafeCells++;
             }
             else {
                 symbol = "*"; // for mines
+                numberOfMines++;
             }
             document.getElementById('button' + row + col).innerHTML = symbol; //COORDINATE
         }
@@ -338,12 +374,12 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
     }
 
     //test code
-    console.log('number of mines: ' + numberOfMines);
-    console.log('number of mines should be ' + numMines);
-    console.log('numberOfSafeCells: ' + numberOfSafeCells);
-    console.log('numberOfSafeCells should be ' + (numRows * numCols - numMines));
-    console.log('total cells' + (numberOfMines + numberOfSafeCells));
-    console.log('total cells should be ' + (numRows * numCols));
+    // console.log('number of mines: ' + numberOfMines);
+    // console.log('number of mines should be ' + numMines);
+    // console.log('numberOfSafeCells: ' + numberOfSafeCells);
+    // console.log('numberOfSafeCells should be ' + (numRows * numCols - numMines));
+    // console.log('total cells' + (numberOfMines + numberOfSafeCells));
+    // console.log('total cells should be ' + (numRows * numCols));
     
     setButtons(gameBoard);
 }
