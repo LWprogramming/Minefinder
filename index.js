@@ -27,7 +27,7 @@ var DEBUG = false;
 
 var difficulty = {
     EASY: 'easy',
-    MEDIUM: 'medium', 
+    MEDIUM: 'medium',
     HARD: 'hard',
     CUSTOM: 'custom'
 };
@@ -65,7 +65,7 @@ function numAdjacent(row, col, mineLocations) {
     // mineLocations is an array of cells that are the locations of the mines.
     var adj = 0;
     mineLocations.forEach(function(cell, index, array) {
-        if ((row <= cell.row + 1) && (row >= cell.row - 1) && 
+        if ((row <= cell.row + 1) && (row >= cell.row - 1) &&
             (col <= cell.col + 1) && (col >= cell.col - 1)) {
             adj++;
         }
@@ -82,11 +82,11 @@ function generateGameBoard(numRows, numCols, numMines) {
             rowArray.push(new cell(row, col));
         }
         gameBoard.push(rowArray);
-    }        
+    }
     // generate random locations for mines.
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
     var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
-    while (numMinesSoFar < numMines) {    
+    while (numMinesSoFar < numMines) {
         var row = Math.floor(Math.random() * numRows);
         var col = Math.floor(Math.random() * numCols);
         if (gameBoard[row][col].mineStatus != IS_MINE) {
@@ -260,7 +260,6 @@ function setButtons(gameBoard) {
                     /*
                     Game over logic:
                     Set the clicked mine to be in red.
-                    
                     Then for every other cell c:
                     set button to disabled. No more clicks should register.
                     if c has a number but is flagged, insert the icon that indicates incorrect flagging.
@@ -307,7 +306,7 @@ function setButtons(gameBoard) {
                             toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED, gameBoard);
                         }
                         else {
-                            toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED); 
+                            toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED);
                             // toggle the flag as long as it hasn't been left-clicked already.
                         }
                     }
@@ -332,7 +331,6 @@ function setButtons(gameBoard) {
                         if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
                             gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
                             document.getElementById('numMinesRemainingNumber').innerHTML = ++numMinesRemaining;
-                            
                             // remove the easter egg message if the player removes some mines so that the number of mines goes from -1 to 0, in which case the easter egg message no longer makes sense.
                             if (numMinesRemaining == 0) {
                                 var negativeMinesLeftParent = document.getElementById('negativeMinesLeftParent');
@@ -360,7 +358,6 @@ function setButtons(gameBoard) {
                 revealCellContents(row, col, gameBoard);
             }
         }
-        
     }
 }
 
@@ -400,11 +397,11 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
             var numMines = customMines;
             break;
         default:
-            // TODO: insert some error handling here--shouldn't ever happen but just in case 
+            // TODO: insert some error handling here--shouldn't ever happen but just in case
             break;
     }
     // build everything back up.
-    var gameBoard = generateGameBoard(numRows, numCols, numMines);    
+    var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
 }
 
