@@ -8,24 +8,26 @@
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script> -->
     <!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
-    <div class='container-fluid' id='grid'></div>
-    <p id='Javascript disabled message'>If you are seeing this message, you probably have Javascript disabled. Please enable it to see the page!</p>
-    <!-- TODO: maybe have _some_ other content so that if not using javascript, the page is not almost a blank. -->
-    <div id='difficulties' class='row'>
-        <button id='restart' onclick="startGame(currentDifficulty)">Restart Game</button>
-        <button id='easy' onclick="startGame(difficulty.EASY)">Easy</button>
-        <button id='medium' onclick="startGame(difficulty.MEDIUM)">Medium</button>
-        <button id='hard' onclick="startGame(difficulty.HARD)">Hard</button>
-    </div>
-    <div id='numMinesRemaining'>
-        <div id='numMinesRemainingText'>
-            Number of mines remaining: 
+    <div id='allcontent' class='center'>
+        <div class='container-fluid' id='grid' style="text-align: center"></div>
+        <p id='Javascript disabled message'>If you are seeing this message, you probably have Javascript disabled. Please enable it to see the page!</p>
+        <!-- TODO: maybe have _some_ other content so that if not using javascript, the page is not almost a blank. -->
+        <div id='difficulties' class='row'>
+            <button id='restart' onclick="startGame(currentDifficulty)">Restart Game</button>
+            <button id='easy' onclick="startGame(difficulty.EASY)">Easy</button>
+            <button id='medium' onclick="startGame(difficulty.MEDIUM)">Medium</button>
+            <button id='hard' onclick="startGame(difficulty.HARD)">Hard</button>
         </div>
-        <div id='numMinesRemainingNumber'>
-            if you are seeing this something has gone wrong with the number of mines remaining counter
+        <div id='numMinesRemaining'>
+            <div id='numMinesRemainingText'>
+                Number of mines remaining: 
+            </div>
+            <div id='numMinesRemainingNumber'>
+                if you are seeing this something has gone wrong with the number of mines remaining counter
+            </div>
         </div>
+        <div id='negativeMinesLeftParent'></div>
     </div>
-    <div id='negativeMinesLeftParent'></div>
     <link rel="stylesheet" href="index.css">
     <script src="index.js"></script>
 </body>

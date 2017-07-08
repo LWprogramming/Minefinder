@@ -1,2 +1,10 @@
+.center {
+    position: fixed; /* or absolute */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+}
+
 #numMinesRemainingText {float:left;} 
-#numMinesRemainingNumber {float:left;} 
+
+/*#numMinesRemainingNumber {float:left;} */
