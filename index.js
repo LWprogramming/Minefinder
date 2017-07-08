@@ -1,11 +1,15 @@
 //TODO FOR NEXT TIME:
+// - add a countdown for the number of mines
+// bug: doesn't seem to work as expected if you go into negatives and back again
+// also don't add another easter egg message if you go -1, -2, -3, etc.-- just have one.
+
+
 /*
 Other assorted things (no set timeline)
 - things marked PROD, aka things to be done when no longer in debug mode.
 - refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
 - this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 - add a game timer
-- add a countdown for the number of mines
 - add game statistics (that can be reset of course) and leaderboard
 - support chording--look up minesweeper wiki for this.
 - make the website independent of browser, version, mobile vs desktop, etc.
@@ -38,6 +42,8 @@ var cellStatusEnum = {
 };
 
 var IS_MINE = -1;
+
+var numMinesRemaining = "if you are seeing this something has gone wrong with the number of mines remaining counter";
 
 if (DEBUG) {
     var UNCLICKED_COLOR = 'white';
@@ -98,6 +104,11 @@ function generateGameBoard(numRows, numCols, numMines) {
             }
         }
     }
+
+    // set number for mine counter
+    document.getElementById('numMinesRemainingNumber').innerHTML = numMines;
+    numMinesRemaining = numMines;
+
     return gameBoard;
 }
 
@@ -261,12 +272,30 @@ function setButtons(gameBoard) {
                     var thisCol = coordinates.col; // COORDINATE
                     if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
                         gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
+                        document.getElementById('numMinesRemainingNumber').innerHTML = --numMinesRemaining;
+                        
+                        // small easter egg if the number of mines decreases to less than zero-- naturally at least one of the flags is wrong.
+                        if (numMinesRemaining < 0) {
+                            var negativeMinesLeft = document.createElement('div');
+                            negativeMinesLeft.id = 'negativeMinesLeft message';
+                            negativeMinesLeft.innerHTML = 'Negative mines? Are you sure about that?';
+                            document.getElementById('negativeMinesLeftParent').appendChild(negativeMinesLeft);
+                        }
+
                         if (DEBUG) {
                             this.style.background = RIGHT_CLICKED_COLOR;
                         }
                     }
                     else if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
                         gameBoard[thisRow][thisCol].status = cellStatusEnum.UNCLICKED;
+                        document.getElementById('numMinesRemainingNumber').innerHTML = ++numMinesRemaining;
+                        
+                        // remove the easter egg message if the player removes some mines so that the number of mines goes from -1 to 0, in which case the easter egg message no longer makes sense.
+                        if (numMinesRemaining = 0) {
+                            var negativeMinesLeftParent = document.getElementById('negativeMinesLeftParent');
+                            negativeMinesLeftParent.removeChild(negativeMinesLeftParent.firstChild);
+                        }
+
                         if (DEBUG) {
                             this.style.background = UNCLICKED_COLOR;
                         }
@@ -316,7 +345,7 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
         case difficulty.EASY:
             var numRows = 8;
             var numCols = 8;
-            var numMines = 10;
+            var numMines = 2;
             break;
         case difficulty.MEDIUM:
             var numRows = 16;
@@ -340,7 +369,7 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
     }
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);    
-    setButtons(gameBoard);  
+    setButtons(gameBoard);
 }
 
 startGame(currentDifficulty);
