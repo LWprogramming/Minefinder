@@ -87,7 +87,7 @@ function generateGameBoard(numRows, numCols, numMines) {
             rowArray.push(new cell(row, col));
         }
         gameBoard.push(rowArray);
-        
+    }        
     // generate random locations for mines.
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
     var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
