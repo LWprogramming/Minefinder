@@ -274,7 +274,8 @@ function setButtons(gameBoard) {
                         document.getElementById('numMinesRemainingNumber').innerHTML = --numMinesRemaining;
                         
                         // small easter egg if the number of mines decreases to less than zero-- naturally at least one of the flags is wrong.
-                        if (numMinesRemaining < 0) {
+                        // note that it's checking for -1 since that's the only time player would go from nonnegative to negative number of mines. This way, we don't create a bunch of messages when going from -1 to -2, -2 to -3 (and back)-- only create the message once.
+                        if (numMinesRemaining == -1) {
                             var negativeMinesLeft = document.createElement('div');
                             negativeMinesLeft.id = 'negativeMinesLeft message';
                             negativeMinesLeft.innerHTML = 'Negative mines? Are you sure about that?';
