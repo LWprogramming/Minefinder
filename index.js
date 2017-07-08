@@ -140,6 +140,8 @@ function coordinatesFromButtonID(buttonID) {
     };
 }
 
+/*  Given ints row and col, use the 2-D gameBoard array to change contents of the corresponding button.
+*/
 function revealCellContents(row, col, gameBoard) {
     var symbol;
     if (gameBoard[row][col].mineStatus != IS_MINE) {
@@ -149,6 +151,23 @@ function revealCellContents(row, col, gameBoard) {
         symbol = "*"; // for mines
     }
     document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = symbol; //COORDINATE
+}
+
+/*
+Given ints row and col, boolean flagStatus (true = currentlyFlagged), toggle the status of the cell in question--i.e. change the corresponding button's innerHTML content. gameBoard parameter used for debugging purposes only, so flagging and then unflagging doesn't hide the value of a cell.
+*/
+function toggleFlag(row, col, flagStatus, gameBoard=null) {
+    if (flagStatus) {
+        if (DEBUG) {
+            revealCellContents(row, col, gameBoard);
+        }
+        else {
+            document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = '.';
+        }
+    }
+    else {
+        document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = 'F';
+    }
 }
 
 function setButtons(gameBoard) {
@@ -278,10 +297,20 @@ function setButtons(gameBoard) {
                     var coordinates = coordinatesFromButtonID(this.id);
                     var thisRow = coordinates.row; // COORDINATE
                     var thisCol = coordinates.col; // COORDINATE
+
+                    if (gameBoard[thisRow][thisCol].status != cellStatusEnum.CLICKED) {
+                        if (DEBUG) {
+                            toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED, gameBoard);
+                        }
+                        else {
+                            toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED); 
+                            // toggle the flag as long as it hasn't been left-clicked already.
+                        }
+                    }
                     if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
                         gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
                         document.getElementById('numMinesRemainingNumber').innerHTML = --numMinesRemaining;
-                        
+
                         // small easter egg if the number of mines decreases to less than zero-- naturally at least one of the flags is wrong.
                         // note that it's checking for -1 since that's the only time player would go from nonnegative to negative number of mines. This way, we don't create a bunch of messages when going from -1 to -2, -2 to -3 (and back)-- only create the message once.
                         if (numMinesRemaining == -1) {
@@ -310,7 +339,8 @@ function setButtons(gameBoard) {
                                 this.style.background = UNCLICKED_COLOR;
                             }
                         }
-                    }                        
+                    }
+
                 }
             }
 
