@@ -2,15 +2,16 @@
 // - add win condition check
 // - try to make the grid stay...a grid... instead of the poor alignment we see right now: see https://user-images.githubusercontent.com/13173037/27986310-b24f3218-63cb-11e7-8ada-7455cecedff6.png
 
+
 /*
 Other assorted things (no set timeline)
-
 - things marked PROD, aka things to be done when no longer in debug mode. this includes some graphical changes, but also importantly-- hiding the numbers/mines for the cells-- in-game the player won't have access to that
 - refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
 - this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 - add a game timer
-- support chording--look up minesweeper wiki for this.
+// implement feature-- can't lose on the first click
 - make the website independent of browser, version, mobile vs desktop, etc.
+- support chording--look up minesweeper wiki for this.
 - add game statistics (that can be reset of course) and leaderboard
 - see link: http://www.chezpoor.com/minesweeper/help/minetechnicalnotes.html
 
