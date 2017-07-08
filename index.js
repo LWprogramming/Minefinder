@@ -1,18 +1,15 @@
 //TODO FOR NEXT TIME:
-// - add a countdown for the number of mines
-// bug: doesn't seem to work as expected if you go into negatives and back again
-// also don't add another easter egg message if you go -1, -2, -3, etc.-- just have one.
 
 /*
 Other assorted things (no set timeline)
+- things marked PROD, aka things to be done when no longer in debug mode. this includes some graphical changes, but also importantly-- hiding the numbers/mines for the cells-- in-game the player won't have access to that
 - refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
 - this entire program is run regarless of whether javascript is allowed when viewing this in chrome or not. not sure why; commenting it out prevents it from being run, so probably an issue with chrome settings or whatever, not js.
 - add a game timer
-- add game statistics (that can be reset of course) and leaderboard
 - support chording--look up minesweeper wiki for this.
 - make the website independent of browser, version, mobile vs desktop, etc.
+- add game statistics (that can be reset of course) and leaderboard
 - see link: http://www.chezpoor.com/minesweeper/help/minetechnicalnotes.html
-- things marked PROD, aka things to be done when no longer in debug mode. this includes some graphical changes, but also importantly-- hiding the numbers/mines for the cells-- in-game the player won't have access to that
 
 - overall plan-- implement logic => design/UI/UX => github pages => user testing.
 */
