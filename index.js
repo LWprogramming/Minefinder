@@ -19,7 +19,7 @@ Other assorted things (no set timeline)
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
 jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
 
-var DEBUG = true;
+var DEBUG = false;
 
 var difficulty = {
     EASY: 'easy',
@@ -45,8 +45,8 @@ if (DEBUG) {
     var UNCLICKED_COLOR = 'white';
     var RIGHT_CLICKED_COLOR = 'green';
     var LEFT_CLICKED_COLOR = 'cyan';
-    var CLICKED_MINE_COLOR = 'red';
 }
+var CLICKED_MINE_COLOR = 'red';
 
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
@@ -405,3 +405,15 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
 }
 
 startGame(currentDifficulty);
+
+// ***********************************************************************
+// some stuff for testing-- delete when done.
+
+// enter debug mode button
+var debugToggler = document.createElement('button');
+debugToggler.innerHTML = 'toggle debug mode';
+debugToggler.onclick = function (event) {
+    DEBUG = !DEBUG;
+    startGame(currentDifficulty);
+}
+document.getElementById('difficulties').appendChild(debugToggler);
