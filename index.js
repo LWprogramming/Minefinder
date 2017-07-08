@@ -3,7 +3,6 @@
 // bug: doesn't seem to work as expected if you go into negatives and back again
 // also don't add another easter egg message if you go -1, -2, -3, etc.-- just have one.
 
-
 /*
 Other assorted things (no set timeline)
 - things marked PROD, aka things to be done when no longer in debug mode.
@@ -345,7 +344,7 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
         case difficulty.EASY:
             var numRows = 8;
             var numCols = 8;
-            var numMines = 2;
+            var numMines = 10;
             break;
         case difficulty.MEDIUM:
             var numRows = 16;
