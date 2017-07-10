@@ -361,7 +361,7 @@ function setButtons(gameBoard) {
     }
 }
 
-function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) {
+function startGame(newDifficulty) {
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
@@ -392,9 +392,9 @@ function startGame(newDifficulty, customRows=-1, customCols=-1, customMines=-1) 
             break;
         case difficulty.CUSTOM:
             // in this case, the number of rows, columns, and mines are custom-set.
-            var numRows = customRows;
-            var numCols = customCols;
-            var numMines = customMines;
+            var numRows = document.getElementById('customNumRows').value;
+            var numCols = document.getElementById('customNumCols').value;
+            var numMines = document.getElementById('customNumMines').value;
             break;
         default:
             // TODO: insert some error handling here--shouldn't ever happen but just in case
