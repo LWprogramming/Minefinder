@@ -1,4 +1,7 @@
 //TODO FOR NEXT TIME:
+// for custom button, sanitize inputs.
+// for custom button, add default values or background text.
+// set up custom button formatting and layout
 // - add win condition check
 // - try to make the grid stay...a grid... instead of the poor alignment we see right now: see https://user-images.githubusercontent.com/13173037/27986310-b24f3218-63cb-11e7-8ada-7455cecedff6.png
 
