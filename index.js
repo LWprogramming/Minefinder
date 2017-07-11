@@ -46,12 +46,12 @@ var IS_MINE = -1;
 
 var numMinesRemaining = "if you are seeing this something has gone wrong with the number of mines remaining counter";
 
-if (DEBUG) {
-    var UNCLICKED_COLOR = 'white';
-    var RIGHT_CLICKED_COLOR = 'green';
-    var LEFT_CLICKED_COLOR = 'cyan';
-}
+var UNCLICKED_COLOR;
+var RIGHT_CLICKED_COLOR;
+var LEFT_CLICKED_COLOR;
 var CLICKED_MINE_COLOR = 'red';
+
+var NUM_SAFE_CELLS_LEFT; // this value will be set at the start as number of safe cells - number of mines. Each safe click (including automatically revealed cell clicks) will decrease it by 1. When it reaches 0, then all the safe cells have been revealed, meaning the player has won the game (regardless of flagging status.)
 
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
@@ -109,7 +109,7 @@ function generateGameBoard(numRows, numCols, numMines) {
     // set number for mine counter
     document.getElementById('numMinesRemainingNumber').innerHTML = numMines;
     numMinesRemaining = numMines;
-
+    NUM_SAFE_CELLS_LEFT = numRows * numCols - numMines; // this may seem like unnecessary code but it's needed for checking win conditions-- the number of flags doesn't affect that.
     return gameBoard;
 }
 
@@ -176,6 +176,12 @@ function toggleFlag(row, col, flagStatus, gameBoard=null) {
 }
 
 function setButtons(gameBoard) {
+    if (DEBUG) {
+        UNCLICKED_COLOR = 'white';
+        RIGHT_CLICKED_COLOR = 'green';
+        LEFT_CLICKED_COLOR = 'cyan';
+    }
+
     // Put together game board.
     var numRows = gameBoard.length;
     var numCols = gameBoard[0].length;
@@ -292,6 +298,16 @@ function setButtons(gameBoard) {
 
                     document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.background = CLICKED_MINE_COLOR; // COORDINATE
                     // Change the content to the picture of a mine. PROD
+                }
+
+                // all safe cells have been revealed-- player wins!
+                NUM_SAFE_CELLS_LEFT--;
+                console.log(NUM_SAFE_CELLS_LEFT);
+                if (NUM_SAFE_CELLS_LEFT == 0) {
+                    if (DEBUG) {
+                        console.log("You win!");
+                    }
+                    // PROD: add a win message/ smiley face/ whatever.
                 }
             };
 
