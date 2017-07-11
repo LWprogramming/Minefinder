@@ -18,6 +18,17 @@
             <button id='easy' onclick="startGame(difficulty.EASY)">Easy</button>
             <button id='medium' onclick="startGame(difficulty.MEDIUM)">Medium</button>
             <button id='hard' onclick="startGame(difficulty.HARD)">Hard</button>
+            <div id='customDifficulty'>
+                <button id='custom' onclick="startGame(difficulty.CUSTOM)">Custom</button>
+                <form>
+                    rows: 
+                    <input type='text' id='customNumRows'>
+                    columns:
+                    <input type='text' id='customNumCols'>
+                    mines:
+                    <input type='text' id='customNumMines'>
+                </form>
+            </div>
         </div>
         <div id='numMinesRemaining'>
             <div id='numMinesRemainingText'>
