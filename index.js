@@ -18,6 +18,7 @@ Other assorted things (no set timeline)
 - overall plan-- implement logic => design/UI/UX => github pages => user testing.
 */
 
+/*jshint esversion: 6 */
 
 // If Javascript is not disabled, then remove the message saying that it is.
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
@@ -87,11 +88,11 @@ function generateGameBoard(numRows, numCols, numMines) {
     var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
     var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
     while (numMinesSoFar < numMines) {
-        var row = Math.floor(Math.random() * numRows);
-        var col = Math.floor(Math.random() * numCols);
-        if (gameBoard[row][col].mineStatus != IS_MINE) {
-            gameBoard[row][col].mineStatus = IS_MINE;
-            mineLocations.push(new cell(row, col));
+        var mineRow = Math.floor(Math.random() * numRows);
+        var mineCol = Math.floor(Math.random() * numCols);
+        if (gameBoard[mineRow][mineCol].mineStatus != IS_MINE) {
+            gameBoard[mineRow][mineCol].mineStatus = IS_MINE;
+            mineLocations.push(new cell(mineRow, mineCol));
             numMinesSoFar++;
         }
     }
@@ -292,7 +293,7 @@ function setButtons(gameBoard) {
                     document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.background = CLICKED_MINE_COLOR; // COORDINATE
                     // Change the content to the picture of a mine. PROD
                 }
-            }
+            };
 
             // right-click logic
             button.onmouseup = function(event) {
@@ -344,7 +345,7 @@ function setButtons(gameBoard) {
                     }
 
                 }
-            }
+            };
 
             divRow.appendChild(button);
         }
@@ -416,7 +417,7 @@ debugToggler.innerHTML = 'toggle debug mode';
 debugToggler.onclick = function (event) {
     DEBUG = !DEBUG;
     startGame(currentDifficulty);
-}
+};
 document.getElementById('difficulties').appendChild(debugToggler);
 
 // instructions for play testing
