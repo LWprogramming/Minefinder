@@ -358,6 +358,19 @@ function setButtons(gameBoard) {
     }
 }
 
+/* Used to validate dimension input for custom game. Inputs are strings taken from the fields when entering a value. Must be positive integer between 1 and 24, inclusive. */
+function isValidDimension(rows, cols, mines) {
+    var gridMaxSize = 24;
+    var maxNumMines = 99;
+    var numRows = Math.floor(Number(rows));
+    var numCols = Math.floor(Number(cols));
+    var numMines = Math.floor(Number(mines));
+    return String(numRows) === rows && String(numCols) === cols && String(numMines) === mines // must be integer, i.e. when rounded down to nearest int, should have no change.
+        && numRows >= 1 && numRows <= gridMaxSize // not too many rows
+        && numCols >= 1 && numCols <= gridMaxSize // not too many columns
+        && numMines <= min(maxNumMines, numRows * numCols - 1); // not too many mines
+}
+
 function startGame(newDifficulty) {
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
@@ -392,6 +405,9 @@ function startGame(newDifficulty) {
             var numRows = document.getElementById('customNumRows').value;
             var numCols = document.getElementById('customNumCols').value;
             var numMines = document.getElementById('customNumMines').value;
+            if !(isValidDimension(numRows, numCols, numMines)) {
+                
+            }
             break;
         default:
             // TODO: insert some error handling here--shouldn't ever happen but just in case
