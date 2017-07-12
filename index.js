@@ -384,13 +384,6 @@ function dismissInvalidMessage(event) {
 }
 
 function startGame(newDifficulty) {
-    // clean out the old stuff, removing all buttons
-    // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
-    var grid = document.getElementById('grid');
-    while (grid.firstChild) {
-        grid.removeChild(grid.firstChild);
-    }
-
     // board parameters
     // console.log(currentDifficulty);
     if (newDifficulty != difficulty.CUSTOM) {
@@ -435,6 +428,14 @@ function startGame(newDifficulty) {
             // TODO: insert some error handling here--shouldn't ever happen but just in case
             break;
     }
+    
+    // clean out the old stuff, removing all buttons
+    // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
+    var grid = document.getElementById('grid');
+    while (grid.firstChild) {
+        grid.removeChild(grid.firstChild);
+    }
+
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
