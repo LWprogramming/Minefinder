@@ -373,13 +373,10 @@ function isValidDimension(rows, cols, mines) {
 }
 
 // Upon clicking the dismiss button that appears when player enters invalid input.
-function dismissInvalidMessage(event) { 
+function dismissInvalidMessage() { 
     var invalidDiv = document.getElementById('invalidCustomInput'); // remove the message and all its parts
-    if(invalidDiv != null) {
-        while(invalidDiv.firstChild) {
-            invalidDiv.removeChild(invalidDiv.firstChild);
-        }
-        invalidDiv.parentNode.removeChild(invalidDiv);
+    while(invalidDiv.firstChild) {
+        invalidDiv.removeChild(invalidDiv.firstChild);
     }
 }
 
@@ -411,13 +408,17 @@ function startGame(newDifficulty) {
             var numCols = document.getElementById('customNumCols').value;
             var numMines = document.getElementById('customNumMines').value;
             if (!isValidDimension(numRows, numCols, numMines)) {
-                var invalidCustomInput = document.createElement('div');
-                invalidCustomInput.id = 'invalidCustomInput';
                 var invalidCustomInputText = document.createElement('p');
-                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + gridMaxSize + ' rows, between 1 and ' + gridMaxSize + ' columns, and between 1 and ' + Math.min(maxNumMines, numRows * numCols - 1) + ' mines.'
+                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + gridMaxSize + ' rows, between 1 and ' + gridMaxSize + ' columns, and at least one mine.'
                 var invalidCustomInputButton = document.createElement('button');
                 invalidCustomInputButton.innerHTML = 'Dismiss';
-                invalidCustomInputButton.onclick = dismissInvalidMessage(event);
+                invalidCustomInputButton.onclick = function(event) {
+                    // Upon clicking the dismiss button that appears when player enters invalid input. 
+                    var invalidDiv = document.getElementById('invalidCustomInput'); // remove the message and all its parts
+                    while(invalidDiv.firstChild) {
+                        invalidDiv.removeChild(invalidDiv.firstChild);
+                    }
+                };
                 invalidCustomInput.appendChild(invalidCustomInputText);
                 invalidCustomInput.appendChild(invalidCustomInputButton);
                 document.getElementById('allcontent').appendChild(invalidCustomInput);
