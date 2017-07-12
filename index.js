@@ -1,25 +1,3 @@
-//TODO FOR NEXT TIME:
-// - make sure literally nothing is shown on the page if javascript is not enabled. i.e. probably add all the buttons programmatically.
-// for custom button, sanitize inputs.
-// for custom button, add default values or background text.
-// set up custom button formatting and layout
-// - try to make the grid stay...a grid... instead of the poor alignment we see right now: see https://user-images.githubusercontent.com/13173037/27986310-b24f3218-63cb-11e7-8ada-7455cecedff6.png
-
-
-/*
-Other assorted things (no set timeline)
-- things marked PROD, aka things to be done when no longer in debug mode. this includes some graphical changes, but also importantly-- hiding the numbers/mines for the cells-- in-game the player won't have access to that
-- refactor button.id (anything labeled COORDINATE). See comments there to see--basically try to avoid manipulating strings for everything.
-- add a game timer
-// implement feature-- can't lose on the first click
-- make the website independent of browser, version, mobile vs desktop, etc.
-- support chording--look up minesweeper wiki for this.
-- add game statistics (that can be reset of course) and leaderboard
-- see link: http://www.chezpoor.com/minesweeper/help/minetechnicalnotes.html
-
-- overall plan-- implement logic => design/UI/UX => github pages => user testing.
-*/
-
 /*jshint esversion: 6 */
 
 // If Javascript is not disabled, then remove the message saying that it is.
