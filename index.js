@@ -33,6 +33,9 @@ var CLICKED_MINE_COLOR = 'red';
 
 var NUM_SAFE_CELLS_LEFT; // this value will be set at the start as number of safe cells - number of mines. Each safe click (including automatically revealed cell clicks) will decrease it by 1. When it reaches 0, then all the safe cells have been revealed, meaning the player has won the game (regardless of flagging status.)
 
+var gridMaxSize = 24;
+var maxNumMines = 99;
+
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
     this.row = row;
@@ -360,15 +363,24 @@ function setButtons(gameBoard) {
 
 /* Used to validate dimension input for custom game. Inputs are strings taken from the fields when entering a value. Must be positive integer between 1 and 24, inclusive. */
 function isValidDimension(rows, cols, mines) {
-    var gridMaxSize = 24;
-    var maxNumMines = 99;
     var numRows = Math.floor(Number(rows));
     var numCols = Math.floor(Number(cols));
     var numMines = Math.floor(Number(mines));
     return String(numRows) === rows && String(numCols) === cols && String(numMines) === mines // must be integer, i.e. when rounded down to nearest int, should have no change.
-        && numRows >= 1 && numRows <= gridMaxSize // not too many rows
-        && numCols >= 1 && numCols <= gridMaxSize // not too many columns
-        && numMines <= min(maxNumMines, numRows * numCols - 1); // not too many mines
+        && numRows >= 1 && numRows <= gridMaxSize
+        && numCols >= 1 && numCols <= gridMaxSize
+        && numMines >= 1 && numMines <= Math.min(maxNumMines, numRows * numCols - 1);
+}
+
+// Upon clicking the dismiss button that appears when player enters invalid input.
+function dismissInvalidMessage(event) { 
+    var invalidDiv = document.getElementById('invalidCustomInput'); // remove the message and all its parts
+    if(invalidDiv != null) {
+        while(invalidDiv.firstChild) {
+            invalidDiv.removeChild(invalidDiv.firstChild);
+        }
+        invalidDiv.parentNode.removeChild(invalidDiv);
+    }
 }
 
 function startGame(newDifficulty) {
@@ -405,8 +417,18 @@ function startGame(newDifficulty) {
             var numRows = document.getElementById('customNumRows').value;
             var numCols = document.getElementById('customNumCols').value;
             var numMines = document.getElementById('customNumMines').value;
-            if !(isValidDimension(numRows, numCols, numMines)) {
-                
+            if (!isValidDimension(numRows, numCols, numMines)) {
+                var invalidCustomInput = document.createElement('div');
+                invalidCustomInput.id = 'invalidCustomInput';
+                var invalidCustomInputText = document.createElement('p');
+                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + gridMaxSize + ' rows, between 1 and ' + gridMaxSize + ' columns, and between 1 and ' + Math.min(maxNumMines, numRows * numCols - 1) + ' mines.'
+                var invalidCustomInputButton = document.createElement('button');
+                invalidCustomInputButton.innerHTML = 'Dismiss';
+                invalidCustomInputButton.onclick = dismissInvalidMessage(event);
+                invalidCustomInput.appendChild(invalidCustomInputText);
+                invalidCustomInput.appendChild(invalidCustomInputButton);
+                document.getElementById('allcontent').appendChild(invalidCustomInput);
+                return;
             }
             break;
         default:
