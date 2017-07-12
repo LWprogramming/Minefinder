@@ -33,7 +33,8 @@ var CLICKED_MINE_COLOR = 'red';
 
 var NUM_SAFE_CELLS_LEFT; // this value will be set at the start as number of safe cells - number of mines. Each safe click (including automatically revealed cell clicks) will decrease it by 1. When it reaches 0, then all the safe cells have been revealed, meaning the player has won the game (regardless of flagging status.)
 
-var gridMaxSize = 24;
+var maxNumRows = 24;
+var maxNumCols = 24;
 var maxNumMines = 99;
 
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
@@ -367,8 +368,8 @@ function isValidDimension(rows, cols, mines) {
     var numCols = Math.floor(Number(cols));
     var numMines = Math.floor(Number(mines));
     return String(numRows) === rows && String(numCols) === cols && String(numMines) === mines // must be integer, i.e. when rounded down to nearest int, should have no change.
-        && numRows >= 1 && numRows <= gridMaxSize
-        && numCols >= 1 && numCols <= gridMaxSize
+        && numRows >= 1 && numRows <= maxNumRows
+        && numCols >= 1 && numCols <= maxNumCols
         && numMines >= 1 && numMines <= Math.min(maxNumMines, numRows * numCols - 1);
 }
 
@@ -409,7 +410,7 @@ function startGame(newDifficulty) {
             var numMines = document.getElementById('customNumMines').value;
             if (!isValidDimension(numRows, numCols, numMines)) {
                 var invalidCustomInputText = document.createElement('p');
-                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + gridMaxSize + ' rows, between 1 and ' + gridMaxSize + ' columns, and at least one mine.'
+                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + maxNumRows + ' rows, between 1 and ' + maxNumCols + ' columns, and at least one mine.'
                 var invalidCustomInputButton = document.createElement('button');
                 invalidCustomInputButton.innerHTML = 'Dismiss';
                 invalidCustomInputButton.onclick = function(event) {
