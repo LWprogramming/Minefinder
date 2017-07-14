@@ -37,6 +37,10 @@ var maxNumRows = 24;
 var maxNumCols = 24;
 var maxNumMines = 99;
 
+function jasmineTest() {
+    return 'hello';
+}
+
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
     // represents one cell on the board.
     this.row = row;
