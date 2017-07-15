@@ -136,14 +136,14 @@ function coordinatesFromButtonID(buttonID) {
 /*  Given ints row and col, use the 2-D gameBoard array to change contents of the corresponding button.
 */
 function revealCellContents(row, col, gameBoard) {
-    var symbol;
+    var path;
     if (gameBoard[row][col].mineStatus != IS_MINE) {
-        symbol = '' + gameBoard[row][col].mineStatus;
+        path = 'resources/Numbers/' + gameBoard[row][col].mineStatus + '.jpg';
     }
     else {
-        symbol = "*"; // for mines
+        path = 'resources/bomb.png'; // for mines
     }
-    document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = symbol; //COORDINATE
+    getButtonImage(document.getElementById(buttonIDFromCoordinates(row, col))).src = path; //COORDINATE
 }
 
 /*
@@ -155,11 +155,11 @@ function toggleFlag(row, col, flagStatus, gameBoard=null) {
             revealCellContents(row, col, gameBoard);
         }
         else {
-            document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = '.';
+            getButtonImage(document.getElementById(buttonIDFromCoordinates(row, col))).src = 'resources/blank.png';
         }
     }
     else {
-        document.getElementById(buttonIDFromCoordinates(row, col)).innerHTML = 'F';
+        getButtonImage(document.getElementById(buttonIDFromCoordinates(row, col))).src = 'resources/redflag.png';
     }
 }
 
@@ -188,7 +188,7 @@ function setButtons(gameBoard) {
             // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
             // https://stackoverflow.com/a/16775485
             button.typeName = 'button';
-            button.innerHTML = '.';
+            // button.innerHTML = '.';
             button.className = 'button col-xs-' + 12 / numCols;
             button.disabled = false; // for restarting games.
             if (DEBUG) {
