@@ -351,6 +351,12 @@ function setButtons(gameBoard) {
                 }
             };
 
+            // add the button's image content
+            var content = document.createElement('img');
+            content.src = 'resources/blank.png';
+            content.alt = 'cellContents';
+            button.appendChild(content);
+
             divRow.appendChild(button);
         }
         document.getElementById('grid').appendChild(divRow);
