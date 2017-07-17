@@ -143,7 +143,7 @@ function revealCellContents(row, col, gameBoard) {
     else {
         path = 'resources/bomb.png'; // for mines
     }
-    getButtonImage(document.getElementById(buttonIDFromCoordinates(row, col))).src = path; //COORDINATE
+    document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('" + path + "')"; //COORDINATE
 }
 
 /*
@@ -155,11 +155,11 @@ function toggleFlag(row, col, flagStatus, gameBoard=null) {
             revealCellContents(row, col, gameBoard);
         }
         else {
-            getButtonImage(document.getElementById(buttonIDFromCoordinates(row, col))).src = 'resources/blank.png';
+            document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/blank.png')"; //COORDINATE
         }
     }
     else {
-        getButtonImage(document.getElementById(buttonIDFromCoordinates(row, col))).src = 'resources/redflag.png';
+        document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/redflag.png')"; //COORDINATE
     }
 }
 
@@ -289,8 +289,8 @@ function setButtons(gameBoard) {
                         console.log("Game over!");
                     }
 
-                    document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.background = CLICKED_MINE_COLOR; // COORDINATE
-                    // Change the content to the picture of a mine. PROD
+                    document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.background = "url('resources/bomb.png')";
+                    document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.backgroundColor = CLICKED_MINE_COLOR; // COORDINATE
                 }
 
                 // all safe cells have been revealed-- player wins!
@@ -358,8 +358,8 @@ function setButtons(gameBoard) {
 
             // add the button's image content
             button.style.background = "url('resources/blank.png')";
-            button.style.height = '16px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
-
+            button.style.height = '20px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
+            button.style.width = '20px';
             divRow.appendChild(button);
         }
         document.getElementById('grid').appendChild(divRow);
