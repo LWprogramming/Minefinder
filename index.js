@@ -435,6 +435,7 @@ function startGame(newDifficulty) {
                 };
                 invalidCustomInput.appendChild(invalidCustomInputText);
                 invalidCustomInput.appendChild(invalidCustomInputButton);
+                invalidCustomInputText.style.color = 'red';
                 document.getElementById('allcontent').appendChild(invalidCustomInput);
                 return;
             }
