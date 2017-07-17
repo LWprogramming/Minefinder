@@ -472,9 +472,8 @@ document.getElementById('difficulties').appendChild(debugToggler);
 
 // instructions for play testing
 // var instructionsDiv = document.createElement('div');
-var instructions = document.createElement('p');
+var instructions = document.getElementById('instructions');
 // instructionsDiv.appendChild(instructions);
 instructions.innerHTML = '. is a blank cell; numbers are numbers; mines are asterisks; flags are F. Red means you clicked a mine so that\'s game over, but you can click one of the buttons below to restart at any time.';
 instructions.style.cssFloat = 'initial';
 instructions.style.width = '500px';
-document.getElementById('allcontent').appendChild(instructions);
