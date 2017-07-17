@@ -357,10 +357,8 @@ function setButtons(gameBoard) {
             };
 
             // add the button's image content
-            var content = document.createElement('img');
-            content.src = 'resources/blank.png';
-            content.alt = 'cellContents';
-            button.appendChild(content);
+            button.style.background = "url('resources/blank.png')";
+            button.style.height = '16px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
 
             divRow.appendChild(button);
         }
