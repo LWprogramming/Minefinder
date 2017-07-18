@@ -354,8 +354,8 @@ function setButtons(gameBoard) {
 
             // add the button's image content
             button.style.background = "url('resources/blank.png')";
-            button.style.height = '20px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
-            button.style.width = '20px';
+            button.style.height = '18px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
+            button.style.width = '18px';
             divRow.appendChild(button);
         }
         document.getElementById('grid').appendChild(divRow);
