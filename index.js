@@ -159,7 +159,12 @@ function toggleFlag(row, col, flagStatus, gameBoard=null) {
         }
     }
     else {
-        document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/redflag.png')"; //COORDINATE
+        if (DEBUG) {
+            document.getElementById(buttonIDFromCoordinates(row, col)).style.backgroundColor = RIGHT_CLICKED_COLOR; // COORDINATE
+        }
+        else {
+            document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/redflag.png')"; //COORDINATE
+        }
     }
 }
 
