@@ -191,7 +191,7 @@ function setButtons(gameBoard) {
             button.className = 'button col-xs-' + 12 / numCols;
             button.disabled = false; // for restarting games.
             if (DEBUG) {
-                button.style.background = UNCLICKED_COLOR;
+                button.style.backgroundColor = UNCLICKED_COLOR;
             }
             // button.row = row;
             // button.colum = col; // COORDINATE
@@ -206,7 +206,7 @@ function setButtons(gameBoard) {
                 }
                 gameBoard[thisRow][thisCol].status = cellStatusEnum.CLICKED;
                 if (DEBUG) {
-                    this.style.background = LEFT_CLICKED_COLOR;
+                    this.style.backgroundColor = LEFT_CLICKED_COLOR;
                 }
                 revealCellContents(thisRow, thisCol, gameBoard);
                 if (gameBoard[thisRow][thisCol].mineStatus == 0) {
@@ -333,7 +333,7 @@ function setButtons(gameBoard) {
                         }
 
                         if (DEBUG) {
-                            this.style.background = RIGHT_CLICKED_COLOR;
+                            this.style.backgroundColor = RIGHT_CLICKED_COLOR;
                         }
                     }
                     else {
@@ -347,7 +347,7 @@ function setButtons(gameBoard) {
                             }
 
                             if (DEBUG) {
-                                this.style.background = UNCLICKED_COLOR;
+                                this.style.backgroundColor = UNCLICKED_COLOR;
                             }
                         }
                     }
