@@ -156,6 +156,7 @@ function toggleFlag(row, col, gameBoard) {
     if (gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
         if (DEBUG) {
             revealCellContents(row, col, gameBoard);
+            document.getElementById(buttonIDFromCoordinates(row, col)).style.backgroundColor = UNCLICKED_COLOR; // COORDINATE
         }
         else {
             document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/blank.png')"; //COORDINATE
@@ -332,10 +333,6 @@ function setButtons(gameBoard) {
                             negativeMinesLeft.innerHTML = 'Negative mines? Are you sure about that?';
                             document.getElementById('negativeMinesLeftParent').appendChild(negativeMinesLeft);
                         }
-
-                        if (DEBUG) {
-                            this.style.backgroundColor = RIGHT_CLICKED_COLOR;
-                        }
                     }
                     else {
                         if (gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED) {
@@ -345,10 +342,6 @@ function setButtons(gameBoard) {
                             if (numMinesRemaining == 0) {
                                 var negativeMinesLeftParent = document.getElementById('negativeMinesLeftParent');
                                 negativeMinesLeftParent.removeChild(negativeMinesLeftParent.firstChild);
-                            }
-
-                            if (DEBUG) {
-                                this.style.backgroundColor = UNCLICKED_COLOR;
                             }
                         }
                     }
