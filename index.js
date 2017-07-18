@@ -199,6 +199,9 @@ function setButtons(gameBoard) {
             button.typeName = 'button';
             button.className = 'button col-xs-' + 12 / numCols;
             button.disabled = false; // for restarting games.
+            button.style.borderLeft = 'solid';
+            button.style.borderTop = 'solid';
+            button.style.borderWidth = '1px';
             if (DEBUG) {
                 button.style.backgroundColor = UNCLICKED_COLOR;
             }
