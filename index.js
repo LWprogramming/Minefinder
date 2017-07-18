@@ -147,7 +147,7 @@ function revealCellContents(row, col, gameBoard) {
 }
 
 /*
-Given ints row and col, boolean flagStatus (true = currentlyFlagged), toggle the status of the cell in question--i.e. change the corresponding button's innerHTML content. gameBoard parameter used for debugging purposes only, so flagging and then unflagging doesn't hide the value of a cell.
+Given ints row and col, boolean flagStatus (true = currentlyFlagged), toggle the status of the cell in question. gameBoard parameter used for debugging purposes only, so flagging and then unflagging doesn't hide the value of a cell.
 */
 function toggleFlag(row, col, flagStatus, gameBoard=null) {
     if (flagStatus) {
@@ -188,7 +188,6 @@ function setButtons(gameBoard) {
             // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
             // https://stackoverflow.com/a/16775485
             button.typeName = 'button';
-            // button.innerHTML = '.';
             button.className = 'button col-xs-' + 12 / numCols;
             button.disabled = false; // for restarting games.
             if (DEBUG) {
