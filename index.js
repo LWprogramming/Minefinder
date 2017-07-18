@@ -415,13 +415,18 @@ function startGame(newDifficulty) {
             var numCols = document.getElementById('customNumCols').value;
             var numMines = document.getElementById('customNumMines').value;
             if (!isValidDimension(numRows, numCols, numMines)) {
+                var invalidDiv = document.getElementById('invalidCustomInput');
+                if (invalidDiv.firstChild) {
+                    // invalid custom input message already exists
+                    return;
+                }
                 var invalidCustomInputText = document.createElement('p');
                 invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + maxNumRows + ' rows, between 1 and ' + maxNumCols + ' columns, and at least one mine.'
                 var invalidCustomInputButton = document.createElement('button');
                 invalidCustomInputButton.innerHTML = 'Dismiss';
                 invalidCustomInputButton.onclick = function(event) {
+                    // remove the message and all its parts
                     // Upon clicking the dismiss button that appears when player enters invalid input. 
-                    var invalidDiv = document.getElementById('invalidCustomInput'); // remove the message and all its parts
                     while(invalidDiv.firstChild) {
                         invalidDiv.removeChild(invalidDiv.firstChild);
                     }
