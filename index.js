@@ -147,10 +147,13 @@ function revealCellContents(row, col, gameBoard) {
 }
 
 /*
-Given ints row and col, boolean flagStatus (true = currentlyFlagged), toggle the status of the cell in question. gameBoard parameter used for debugging purposes only, so flagging and then unflagging doesn't hide the value of a cell.
+Given ints row and col and the gameBoard, toggle the status of the cell in question. gameBoard parameter used for debugging purposes only, so flagging and then unflagging doesn't hide the value of a cell.
 */
-function toggleFlag(row, col, flagStatus, gameBoard=null) {
-    if (flagStatus) {
+function toggleFlag(row, col, gameBoard) {
+    if (gameBoard[row][col].status == cellStatusEnum.CLICKED) {
+        return;
+    }
+    if (gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
         if (DEBUG) {
             revealCellContents(row, col, gameBoard);
         }
@@ -315,15 +318,8 @@ function setButtons(gameBoard) {
                     var thisRow = coordinates.row; // COORDINATE
                     var thisCol = coordinates.col; // COORDINATE
 
-                    if (gameBoard[thisRow][thisCol].status != cellStatusEnum.CLICKED) {
-                        if (DEBUG) {
-                            toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED, gameBoard);
-                        }
-                        else {
-                            toggleFlag(thisRow, thisCol, gameBoard[thisRow][thisCol].status == cellStatusEnum.RIGHTCLICKED);
-                            // toggle the flag as long as it hasn't been left-clicked already.
-                        }
-                    }
+                    toggleFlag(thisRow, thisCol, gameBoard);
+
                     if (gameBoard[thisRow][thisCol].status == cellStatusEnum.UNCLICKED) {
                         gameBoard[thisRow][thisCol].status = cellStatusEnum.RIGHTCLICKED;
                         document.getElementById('numMinesRemainingNumber').innerHTML = --numMinesRemaining;
