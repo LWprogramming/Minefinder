@@ -65,9 +65,9 @@ function numAdjacent(row, col, mineLocations) {
 /* Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols. */
 function generateGameBoard(numRows, numCols, numMines) {
     var gameBoard = [];
-    for (var row = 0; row < numRows; row++) {
+    for (let row = 0; row < numRows; row++) {
         var rowArray = [];
-        for (var col = 0; col < numCols; col++) {
+        for (let col = 0; col < numCols; col++) {
             rowArray.push(new cell(row, col));
         }
         gameBoard.push(rowArray);
@@ -85,8 +85,8 @@ function generateGameBoard(numRows, numCols, numMines) {
         }
     }
     // assign numbers to non-numerical cells
-    for (var row = 0; row < numRows; row++) {
-        for (var col = 0; col < numCols; col++) {
+    for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols; col++) {
             if (gameBoard[row][col].mineStatus != IS_MINE) {
                 // If the given cell doesn't have a mine, then we need the number of mines around it.
                 gameBoard[row][col].mineStatus = numAdjacent(row, col, mineLocations);
@@ -188,10 +188,10 @@ function setButtons(gameBoard) {
     var numRows = gameBoard.length;
     var numCols = gameBoard[0].length;
 
-    for (var row = 0; row < numRows; row++) {
+    for (let row = 0; row < numRows; row++) {
         var divRow = document.createElement('div');
         divRow.className = 'row';
-        for (var col = 0; col < numCols; col++) {
+        for (let col = 0; col < numCols; col++) {
             var button = document.createElement('button');
             button.id = buttonIDFromCoordinates(row, col);
             // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
@@ -256,7 +256,7 @@ function setButtons(gameBoard) {
                         // cell to right exists
                         adjacentCellsList.push([thisRow, thisCol + 1]);
                     }
-                    for (var i = 0; i < adjacentCellsList.length; i++) {
+                    for (let i = 0; i < adjacentCellsList.length; i++) {
                         adjCell = adjacentCellsList[i];
                         var adjRow = adjCell[0];
                         var adjCol = adjCell[1];
@@ -278,8 +278,8 @@ function setButtons(gameBoard) {
                     if c has a number and is not flagged, skip over it. only leave the cells that were already clicked.
                     */
 
-                    for (var row = 0; row < numRows; row++) {
-                        for (var col = 0; col < numCols; col++) {
+                    for (let row = 0; row < numRows; row++) {
+                        for (let col = 0; col < numCols; col++) {
                             var currentButton = document.getElementById(buttonIDFromCoordinates(row, col)); // COORDINATE
                             currentButton.disabled = true; // disable clicking after the game
                             if (gameBoard[row][col].mineStatus != IS_MINE && gameBoard[row][col].status == cellStatusEnum.RIGHTCLICKED) {
@@ -363,8 +363,8 @@ function setButtons(gameBoard) {
 
     if (DEBUG) {
         // fill out each button with the correct content.
-        for (var row = 0; row < numRows; row++) {
-            for (var col = 0; col < numCols; col++) {
+        for (let row = 0; row < numRows; row++) {
+            for (let col = 0; col < numCols; col++) {
                 revealCellContents(row, col, gameBoard);
             }
         }
