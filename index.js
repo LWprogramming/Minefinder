@@ -53,12 +53,13 @@ function numAdjacent(row, col, mineLocations) {
     // returns the number of mines adjacent to the cell with given row and column.
     // mineLocations is an array of cells that are the locations of the mines.
     var adj = 0;
-    mineLocations.forEach(function(cell, index, array) {
+    for (let i = 0; i < mineLocations.length; i++) {
+        var cell = mineLocations[i];
         if ((row <= cell.row + 1) && (row >= cell.row - 1) &&
             (col <= cell.col + 1) && (col >= cell.col - 1)) {
             adj++;
         }
-    });
+    }
     return adj;
 }
 
