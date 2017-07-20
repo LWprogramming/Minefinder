@@ -160,7 +160,7 @@ function toggleFlag(row, col, gameBoard) {
             document.getElementById(buttonIDFromCoordinates(row, col)).style.backgroundColor = UNCLICKED_COLOR; // COORDINATE
         }
         else {
-            document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/blank.svg')"; //COORDINATE
+            document.getElementById(buttonIDFromCoordinates(row, col)).style.background = "url('resources/blank.png')"; //COORDINATE
         }
     }
     else {
@@ -354,7 +354,7 @@ function setButtons(gameBoard) {
             };
 
             // add the button's image content
-            button.style.background = "url('resources/blank.svg')";
+            button.style.background = "url('resources/blank.png')";
             button.style.height = '18px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
             button.style.width = '18px';
             divRow.appendChild(button);
