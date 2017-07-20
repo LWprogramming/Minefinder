@@ -139,7 +139,7 @@ function coordinatesFromButtonID(buttonID) {
 function revealCellContents(row, col, gameBoard) {
     var path;
     if (gameBoard[row][col].mineStatus != IS_MINE) {
-        path = 'resources/Numbers/' + gameBoard[row][col].mineStatus + '.jpg';
+        path = 'resources/Numbers/' + gameBoard[row][col].mineStatus + '.svg';
     }
     else {
         path = 'resources/bomb.png'; // for mines
