@@ -384,7 +384,7 @@ function isValidDimension(rows, cols, mines) {
 }
 
 // Upon clicking the dismiss button that appears when player enters invalid input.
-function dismissInvalidMessage() { 
+function dismissInvalidMessage() {
     var invalidDiv = document.getElementById('invalidCustomInput'); // remove the message and all its parts
     while(invalidDiv.firstChild) {
         invalidDiv.removeChild(invalidDiv.firstChild);
@@ -430,7 +430,7 @@ function startGame(newDifficulty) {
                 invalidCustomInputButton.innerHTML = 'Dismiss';
                 invalidCustomInputButton.onclick = function(event) {
                     // remove the message and all its parts
-                    // Upon clicking the dismiss button that appears when player enters invalid input. 
+                    // Upon clicking the dismiss button that appears when player enters invalid input.
                     while(invalidDiv.firstChild) {
                         invalidDiv.removeChild(invalidDiv.firstChild);
                     }
@@ -446,7 +446,6 @@ function startGame(newDifficulty) {
             // TODO: insert some error handling here--shouldn't ever happen but just in case
             break;
     }
-    
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
