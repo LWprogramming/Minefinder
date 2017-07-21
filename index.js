@@ -37,6 +37,9 @@ var maxNumRows = 24;
 var maxNumCols = 24;
 var maxNumMines = 99;
 
+var imageHeight = '16px';
+var imageWidth = '16px';
+
 // timer code, taken from https://stackoverflow.com/questions/27360457/adding-a-timer-to-my-game/27363674#27363674
 var timer = {
     // this timer fires every second = 1000 milliseconds
@@ -389,8 +392,8 @@ function setButtons(gameBoard) {
 
             // add the button's image content
             button.style.background = "url('resources/blank.png')";
-            button.style.height = '18px'; // this wasn't being set earlier so the buttons would only be 6 px tall.
-            button.style.width = '18px';
+            button.style.height = imageHeight; // this wasn't being set earlier so the buttons would only be 6 px tall.
+            button.style.width = imageWidth;
             divRow.appendChild(button);
         }
         document.getElementById('grid').appendChild(divRow);
