@@ -37,6 +37,39 @@ var maxNumRows = 24;
 var maxNumCols = 24;
 var maxNumMines = 99;
 
+// timer code, taken from https://stackoverflow.com/questions/27360457/adding-a-timer-to-my-game/27363674#27363674
+var timer = {
+    // this timer fires every 500ms
+    delay:500,
+    // fire this timer when requestAnimationFrame's timestamp reaches nextFireTime
+    nextFireTime:0,
+    doFunction:onFire,
+    // just for testing: accumulate how many times this timer has fired
+    counter:0
+};
+// the animation loop
+// The loop automatically receives the currentTime
+function timerLoop(currentTime){
+    // schedule another frame
+    // this is required to make the loop continue
+    // (without another requestAnimationFrame the loop stops)
+    requestAnimationFrame(timerLoop);
+
+    // if the currentTime > this timer's nextFireTime then do the work specified by this timer
+    if(currentTime > timer.nextFireTime){
+        // increment nextFireTime
+        timer.nextFireTime = currentTime + timer.delay;
+
+        // do the work specified in this timer
+        timer.counter++;
+        onFire(timer);
+    }
+}
+function onFire(timer){
+    console.log('counter: ' + timer.counter);
+}
+// requestAnimationFrame(timerLoop); // start the loop
+
 function jasmineTest() {
     return 'hello';
 }
