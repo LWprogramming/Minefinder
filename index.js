@@ -66,9 +66,10 @@ function timerLoop(currentTime){
     }
 }
 function onFire(timer){
-    console.log('counter: ' + timer.counter);
+    document.getElementById('timer').innerHTML = timer.counter;
+    // console.log('counter: ' + timer.counter);
 }
-// requestAnimationFrame(timerLoop); // start the loop
+requestAnimationFrame(timerLoop); // start the loop
 
 function jasmineTest() {
     return 'hello';
