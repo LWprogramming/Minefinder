@@ -39,8 +39,8 @@ var maxNumMines = 99;
 
 // timer code, taken from https://stackoverflow.com/questions/27360457/adding-a-timer-to-my-game/27363674#27363674
 var timer = {
-    // this timer fires every 500ms
-    delay:500,
+    // this timer fires every second = 1000 milliseconds
+    delay:1000,
     // fire this timer when requestAnimationFrame's timestamp reaches nextFireTime
     nextFireTime:0,
     doFunction:onFire,
