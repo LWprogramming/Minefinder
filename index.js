@@ -513,6 +513,6 @@ document.getElementById('difficulties').appendChild(debugToggler);
 // var instructionsDiv = document.createElement('div');
 var instructions = document.getElementById('instructions');
 // instructionsDiv.appendChild(instructions);
-instructions.innerHTML = '';
+instructions.innerHTML = 'Minesweeper starts when a player clicks on a square by left-clicking, which reveals a number or an opening surrounded by numbers. Each number tells you how many mines touch the square. You can mark a mine by putting a flag on it by right-clicking on that square. You win by clearing all the safe squares and lose if you click on a mine. A mine counter tells you how many mines are still hidden and a time counter keeps track of your score. There are three levels of difficulty: Beginner has 10 mines, Intermediate has 40 mines, and Expert has 99 mines. It is also possible to create Custom levels. ';
 instructions.style.cssFloat = 'initial';
 instructions.style.width = '500px';
