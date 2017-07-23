@@ -515,6 +515,7 @@ instructions.innerHTML = 'Minesweeper starts when a player clicks on a square by
 instructions.style.cssFloat = 'initial';
 instructions.style.width = '500px';
 var instructionsSource = document.createElement('sup');
+instructionsSource.style.display = 'inline-block';
 instructionsSource.innerHTML = 'Source: '
 var instructionsSourceLink = document.createElement('a');
 instructionsSourceLink.href = 'http://www.minesweeper.info/wiki/Windows_Minesweeper#Gameplay';
