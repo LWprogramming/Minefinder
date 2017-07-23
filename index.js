@@ -37,6 +37,10 @@ var maxNumRows = 24;
 var maxNumCols = 24;
 var maxNumMines = 99;
 
+var numRows;
+var numCols;
+var numMines;
+
 var imageHeight = '16px';
 var imageWidth = '16px';
 
@@ -436,25 +440,25 @@ function startGame(newDifficulty) {
     }
     switch (newDifficulty) {
         case difficulty.EASY:
-            var numRows = 8;
-            var numCols = 8;
-            var numMines = 10;
+            numRows = 8;
+            numCols = 8;
+            numMines = 10;
             break;
         case difficulty.MEDIUM:
-            var numRows = 16;
-            var numCols = 16;
-            var numMines = 40;
+            numRows = 16;
+            numCols = 16;
+            numMines = 40;
             break;
         case difficulty.HARD:
-            var numRows = 24;
-            var numCols = 24;
-            var numMines = 99;
+            numRows = 24;
+            numCols = 24;
+            numMines = 99;
             break;
         case difficulty.CUSTOM:
             // in this case, the number of rows, columns, and mines are custom-set.
-            var numRows = document.getElementById('customNumRows').value;
-            var numCols = document.getElementById('customNumCols').value;
-            var numMines = document.getElementById('customNumMines').value;
+            numRows = document.getElementById('customNumRows').value;
+            numCols = document.getElementById('customNumCols').value;
+            numMines = document.getElementById('customNumMines').value;
             if (!isValidDimension(numRows, numCols, numMines)) {
                 var invalidDiv = document.getElementById('invalidCustomInput');
                 if (invalidDiv.firstChild) {
@@ -462,7 +466,7 @@ function startGame(newDifficulty) {
                     return;
                 }
                 var invalidCustomInputText = document.createElement('p');
-                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + maxNumRows + ' rows, between 1 and ' + maxNumCols + ' columns, and at least one mine.'
+                invalidCustomInputText.innerHTML = 'Custom input invalid! Must have between 1 and ' + maxNumRows + ' rows, between 1 and ' + maxNumCols + ' columns, and at least one mine.';
                 var invalidCustomInputButton = document.createElement('button');
                 invalidCustomInputButton.innerHTML = 'Dismiss';
                 invalidCustomInputButton.onclick = function(event) {
@@ -516,9 +520,9 @@ instructions.style.cssFloat = 'initial';
 instructions.style.width = '500px';
 var instructionsSource = document.createElement('sup');
 instructionsSource.style.display = 'inline-block';
-instructionsSource.innerHTML = 'Source: '
+instructionsSource.innerHTML = 'Source: ';
 var instructionsSourceLink = document.createElement('a');
 instructionsSourceLink.href = 'http://www.minesweeper.info/wiki/Windows_Minesweeper#Gameplay';
-instructionsSourceLink.innerHTML = 'Minesweeper wiki'
+instructionsSourceLink.innerHTML = 'Minesweeper wiki';
 instructionsSource.appendChild(instructionsSourceLink);
 instructions.appendChild(instructionsSource);
