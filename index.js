@@ -418,10 +418,11 @@ function isValidDimension(rows, cols, mines) {
     var numRows = Math.floor(Number(rows));
     var numCols = Math.floor(Number(cols));
     var numMines = Math.floor(Number(mines));
-    return String(numRows) === rows && String(numCols) === cols && String(numMines) === mines // must be integer, i.e. when rounded down to nearest int, should have no change.
-        && numRows >= 1 && numRows <= maxNumRows
-        && numCols >= 1 && numCols <= maxNumCols
-        && numMines >= 1 && numMines <= Math.min(maxNumMines, numRows * numCols - 1);
+    var integerInputs = String(numRows) === rows && String(numCols) === cols && String(numMines) === mines; // must be integer, i.e. when rounded down to nearest int, should have no change.
+    var rowsWithinBounds = numRows >= 1 && numRows <= maxNumRows;
+    var colsWithinBounds = numCols >= 1 && numCols <= maxNumCols;
+    var minesWithinBounds = numMines >= 1 && numMines <= Math.min(maxNumMines, numRows * numCols - 1);
+    return integerInputs && rowsWithinBounds && colsWithinBounds && minesWithinBounds;
 }
 
 // Upon clicking the dismiss button that appears when player enters invalid input.
