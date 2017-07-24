@@ -12,11 +12,11 @@ Opening index.html in a web browser. Make sure to enable Javascript-- if you don
 
 ### Viewing test results
 
-Open SpecRunner.html in a web browser. Make sure to enable Javascript. The test results will be displayed. For more information on Jasmine testing, see [here](https://jasmine.github.io/).
+Open [SpecRunner](SpecRunner.html) in a web browser. Make sure to enable Javascript. The test results will be displayed. For more information on Jasmine testing, see [here](https://jasmine.github.io/).
 
 ### Writing/ editing tests
 
-Tests are in the file tests.js.
+Tests are in [this file](tests.js).
 
 ## Built With
 
