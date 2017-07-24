@@ -6,17 +6,17 @@
 
 `git clone https://github.com/LWprogramming/Minefinder.git`
 
-Opening index.html in a web browser. Make sure to enable Javascript-- if you don't, you'll see a large message reminding you to do so.
+Opening [index.html](index.html) in a web browser. Make sure to enable Javascript-- if you don't, you'll see a large message reminding you to do so.
 
 ## Testing
 
 ### Viewing test results
 
-Open [SpecRunner](SpecRunner.html) in a web browser. Make sure to enable Javascript. The test results will be displayed. For more information on Jasmine testing, see [here](https://jasmine.github.io/).
+Open [SpecRunner.html](SpecRunner.html) in a web browser. Make sure to enable Javascript. The test results will be displayed. For more information on Jasmine testing, see [here](https://jasmine.github.io/).
 
 ### Writing/ editing tests
 
-Tests are in [this file](tests.js).
+Tests are in [tests.js](tests.js).
 
 ## Built With
 
@@ -28,4 +28,4 @@ Tests are in [this file](tests.js).
 
 ## Contributing
 
-Feel free to send a pull request! Just remember to check your code by opening up SpecRunner.html before sending the pull request. 
+Feel free to send a pull request! Just remember to check your code against the tests before sending the pull request :]
