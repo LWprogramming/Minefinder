@@ -432,8 +432,8 @@ function isValidDimension(rows, cols, mines) {
     var numCols = Math.floor(Number(cols));
     var numMines = Math.floor(Number(mines));
     var integerInputs = String(numRows) === rows && String(numCols) === cols && String(numMines) === mines; // must be integer, i.e. when rounded down to nearest int, should have no change.
-    var rowsWithinBounds = numRows >= 1 && numRows <= maxNumRows;
-    var colsWithinBounds = numCols >= 1 && numCols <= maxNumCols;
+    var rowsWithinBounds = numRows >= 2 && numRows <= maxNumRows;
+    var colsWithinBounds = numCols >= 2 && numCols <= maxNumCols;
     var minesWithinBounds = numMines >= 1 && numMines <= Math.min(maxNumMines, numRows * numCols - 1);
     return integerInputs && rowsWithinBounds && colsWithinBounds && minesWithinBounds;
 }
