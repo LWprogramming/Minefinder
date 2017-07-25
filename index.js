@@ -433,12 +433,8 @@ function dismissInvalidMessage() {
     }
 }
 
-function startGame(newDifficulty) {
+function setBoardDimensions(newDifficulty) {
     // board parameters
-    // console.log(currentDifficulty);
-    if (newDifficulty != difficulty.CUSTOM) {
-        currentDifficulty = newDifficulty;
-    }
     switch (newDifficulty) {
         case difficulty.EASY:
             numRows = 8;
@@ -488,16 +484,23 @@ function startGame(newDifficulty) {
             // TODO: insert some error handling here--shouldn't ever happen but just in case
             break;
     }
+}
+
+function resetBoard() {
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
-
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
+}
+
+function startGame(newDifficulty) {
+    setBoardDimensions(newDifficulty);
+    resetBoard();
 }
 
 startGame(currentDifficulty);
