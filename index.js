@@ -44,6 +44,7 @@ var imageHeight = '16px';
 var imageWidth = '16px';
 
 // timer code, taken from https://stackoverflow.com/questions/27360457/adding-a-timer-to-my-game/27363674#27363674
+var gameRunning = false; // if false, timer does not move.
 var timer = {
     // this timer fires every second = 1000 milliseconds
     delay:1000,
@@ -59,8 +60,9 @@ function timerLoop(currentTime){
     // schedule another frame
     // this is required to make the loop continue
     // (without another requestAnimationFrame the loop stops)
-    requestAnimationFrame(timerLoop);
-
+    if (gameRunning) {
+        requestAnimationFrame(timerLoop);
+    }
     // if the currentTime > this timer's nextFireTime then do the work specified by this timer
     if(currentTime > timer.nextFireTime){
         // increment nextFireTime
@@ -75,7 +77,18 @@ function onFire(timer){
     document.getElementById('timer').innerHTML = timer.counter;
     // console.log('counter: ' + timer.counter);
 }
-requestAnimationFrame(timerLoop); // start the loop
+function startTimer() {
+    gameRunning = true;
+    requestAnimationFrame(timerLoop);
+}
+function stopTimer() {
+    cancelAnimationFrame(timerLoop);
+    gameRunning = false;
+}
+function resetTimer() {
+    document.getElementById('timer').innerHTML = 0;
+    timer.counter = 0;
+}
 
 function jasmineTest() {
     return 'hello';
@@ -265,6 +278,9 @@ function setButtons(gameBoard) {
 
             // left-click logic
             button.onclick = function(event) {
+                if (!gameRunning) {
+                    startTimer(); // side effect is that gameRunning is now set to true.
+                }
                 var coordinates = coordinatesFromButtonID(this.id);
                 var thisRow = coordinates.row; // COORDINATE
                 var thisCol = coordinates.col; // COORDINATE
@@ -357,6 +373,7 @@ function setButtons(gameBoard) {
 
                     document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.background = "url('resources/bomb.png')";
                     document.getElementById(buttonIDFromCoordinates(thisRow, thisCol)).style.backgroundColor = CLICKED_MINE_COLOR; // COORDINATE
+                    stopTimer();
                 }
 
                 // all safe cells have been revealed-- player wins!
@@ -367,6 +384,7 @@ function setButtons(gameBoard) {
                         console.log("You win!");
                     }
                     // PROD: add a win message/ smiley face/ whatever.
+                    stopTimer();
                 }
             };
 
@@ -510,6 +528,8 @@ function resetBoard() {
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
+    resetTimer();
+    stopTimer();
 }
 
 function startGame(newDifficulty) {
