@@ -448,6 +448,7 @@ function dismissInvalidMessage() {
 
 function setBoardDimensions(newDifficulty) {
     // board parameters
+    currentDifficulty = newDifficulty;
     switch (newDifficulty) {
         case difficulty.EASY:
             numRows = 8;
