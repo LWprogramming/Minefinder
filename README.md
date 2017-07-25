@@ -28,4 +28,6 @@ Tests are in [tests.js](tests.js).
 
 ## Contributing
 
-Feel free to send a pull request! Just remember to check your code against the tests before sending the pull request :]
+Pull requests are welcome! Just remember to check your code against the tests beforehand :]
+
+For first-timers, check out the [issues](https://github.com/LWprogramming/Minefinder/issues) labeled "first-timer." These are issues that are a good place to get started. Don't worry too much about getting things "perfect" in your pull request.
