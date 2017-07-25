@@ -385,6 +385,12 @@ function setButtons(gameBoard) {
                     }
                     // PROD: add a win message/ smiley face/ whatever.
                     stopTimer();
+                    // prevent any more clicking
+                    for (let row = 0; row < numRows; row++) {
+                        for (let col = 0; col < numCols; col++) {
+                            document.getElementById(buttonIDFromCoordinates(row, col)).disabled = true;
+                        }
+                    }
                 }
             };
 
