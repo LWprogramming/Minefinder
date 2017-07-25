@@ -75,7 +75,6 @@ function timerLoop(currentTime){
 }
 function onFire(timer){
     document.getElementById('timer').innerHTML = timer.counter;
-    // console.log('counter: ' + timer.counter);
 }
 function startTimer() {
     gameRunning = true;
@@ -378,7 +377,6 @@ function setButtons(gameBoard) {
 
                 // all safe cells have been revealed-- player wins!
                 NUM_SAFE_CELLS_LEFT--;
-                // console.log(NUM_SAFE_CELLS_LEFT);
                 if (NUM_SAFE_CELLS_LEFT == 0) {
                     if (DEBUG) {
                         console.log("You win!");
