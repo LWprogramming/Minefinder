@@ -104,6 +104,29 @@ function numAdjacent(row, col, mineLocations) {
     return adj;
 }
 
+/**
+ * Modifies the gameBoard with the mines and returns a list of cells that contain the coordinates of each mine.
+ * @param  {[integer]} numRows number of rows in the game board
+ * @param  {[integer]} numCols number of columns in the game board
+ * @param  {[integer]} numMines number of mines to generate
+ * @param  {[2-D cell array]} gameBoard contains status of the board
+ * @return {[array of cells]} mineLocations array of the locations of the mines
+ */
+function generateMineLocations(numRows, numCols, numMines, gameBoard) {
+    var mineLocations = [];
+    var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
+    while (numMinesSoFar < numMines) {
+        var mineRow = Math.floor(Math.random() * numRows);
+        var mineCol = Math.floor(Math.random() * numCols);
+        if (gameBoard[mineRow][mineCol].mineStatus != IS_MINE) {
+            gameBoard[mineRow][mineCol].mineStatus = IS_MINE;
+            mineLocations.push(new cell(mineRow, mineCol));
+            numMinesSoFar++;
+        }
+    }
+    return mineLocations;
+}
+
 /* Constructs game board given numRows, numCols, and numMines. Returns 2-D array representing the board state of dimensions numRows x numCols. */
 function generateGameBoard(numRows, numCols, numMines) {
     var gameBoard = [];
@@ -115,17 +138,8 @@ function generateGameBoard(numRows, numCols, numMines) {
         gameBoard.push(rowArray);
     }
     // generate random locations for mines.
-    var mineLocations = []; // handy list of mine coordinates for convenience. Can be derived from gameBoard but this is more convenient.
-    var numMinesSoFar = 0; // avoid marking the same location twice as a mine.
-    while (numMinesSoFar < numMines) {
-        var mineRow = Math.floor(Math.random() * numRows);
-        var mineCol = Math.floor(Math.random() * numCols);
-        if (gameBoard[mineRow][mineCol].mineStatus != IS_MINE) {
-            gameBoard[mineRow][mineCol].mineStatus = IS_MINE;
-            mineLocations.push(new cell(mineRow, mineCol));
-            numMinesSoFar++;
-        }
-    }
+    var mineLocations = generateMineLocations(numRows, numCols, numMines, gameBoard);
+
     // assign numbers to non-numerical cells
     for (let row = 0; row < numRows; row++) {
         for (let col = 0; col < numCols; col++) {
