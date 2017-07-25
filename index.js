@@ -14,6 +14,9 @@ var difficulty = {
 };
 
 var currentDifficulty = difficulty.EASY;
+var numRows;
+var numCols;
+var numMines;
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -36,10 +39,6 @@ var NUM_SAFE_CELLS_LEFT; // this value will be set at the start as number of saf
 var maxNumRows = 24;
 var maxNumCols = 24;
 var maxNumMines = 99;
-
-var numRows;
-var numCols;
-var numMines;
 
 var imageHeight = '16px';
 var imageWidth = '16px';
