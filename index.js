@@ -14,9 +14,6 @@ var difficulty = {
 };
 
 var currentDifficulty = difficulty.EASY;
-var numRows;
-var numCols;
-var numMines;
 
 // cell status must be one of these.
 var cellStatusEnum = {
@@ -39,6 +36,10 @@ var NUM_SAFE_CELLS_LEFT; // this value will be set at the start as number of saf
 var maxNumRows = 24;
 var maxNumCols = 24;
 var maxNumMines = 99;
+
+var numRows;
+var numCols;
+var numMines;
 
 var imageHeight = '16px';
 var imageWidth = '16px';
@@ -418,8 +419,8 @@ function isValidDimension(rows, cols, mines) {
     var numCols = Math.floor(Number(cols));
     var numMines = Math.floor(Number(mines));
     var integerInputs = String(numRows) === rows && String(numCols) === cols && String(numMines) === mines; // must be integer, i.e. when rounded down to nearest int, should have no change.
-    var rowsWithinBounds = numRows >= 1 && numRows <= maxNumRows;
-    var colsWithinBounds = numCols >= 1 && numCols <= maxNumCols;
+    var rowsWithinBounds = numRows >= 2 && numRows <= maxNumRows;
+    var colsWithinBounds = numCols >= 2 && numCols <= maxNumCols;
     var minesWithinBounds = numMines >= 1 && numMines <= Math.min(maxNumMines, numRows * numCols - 1);
     return integerInputs && rowsWithinBounds && colsWithinBounds && minesWithinBounds;
 }
@@ -432,8 +433,12 @@ function dismissInvalidMessage() {
     }
 }
 
-function setBoardDimensions(newDifficulty) {
+function startGame(newDifficulty) {
     // board parameters
+    // console.log(currentDifficulty);
+    if (newDifficulty != difficulty.CUSTOM) {
+        currentDifficulty = newDifficulty;
+    }
     switch (newDifficulty) {
         case difficulty.EASY:
             numRows = 8;
@@ -483,23 +488,16 @@ function setBoardDimensions(newDifficulty) {
             // TODO: insert some error handling here--shouldn't ever happen but just in case
             break;
     }
-}
-
-function resetBoard() {
     // clean out the old stuff, removing all buttons
     // probably can be optimized to just overwrite the previous states but this works fine since boards are small.
     var grid = document.getElementById('grid');
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
+
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
-}
-
-function startGame(newDifficulty) {
-    setBoardDimensions(newDifficulty);
-    resetBoard();
 }
 
 startGame(currentDifficulty);
