@@ -389,6 +389,7 @@ function setButtons(gameBoard) {
                             document.getElementById(buttonIDFromCoordinates(row, col)).disabled = true;
                         }
                     }
+                    document.getElementById('win message').innerHTML = 'Congratulations, you win!';
                 }
             };
 
@@ -529,6 +530,8 @@ function resetBoard() {
     while (grid.firstChild) {
         grid.removeChild(grid.firstChild);
     }
+    // remove win message if it exists
+    document.getElementById('win message').innerHTML = '';
     // build everything back up.
     var gameBoard = generateGameBoard(numRows, numCols, numMines);
     setButtons(gameBoard);
