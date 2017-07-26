@@ -498,7 +498,7 @@ function setBoardDimensions(newDifficulty) {
             var customNumRows = document.getElementById('customNumRows').value;
             var customNumCols = document.getElementById('customNumCols').value;
             var customNumMines = document.getElementById('customNumMines').value;
-            if (!isValidDimension(numRows, numCols, numMines)) {
+            if (!isValidDimension(customNumRows, customNumCols, customNumMines)) {
                 var invalidDiv = document.getElementById('invalidCustomInput');
                 if (invalidDiv.firstChild) {
                     // invalid custom input message already exists
