@@ -74,7 +74,8 @@ function timerLoop(currentTime){
     }
 }
 function onFire(timer){
-    document.getElementById('timer').innerHTML = timer.counter;
+    document.getElementById('timer').innerHTML = timer.counter - 1;
+    // subtract one becase the current code immediately makes the timer fire, which would make the timer start at 1 second. This resets it.
 }
 function startTimer() {
     gameRunning = true;
