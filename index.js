@@ -495,9 +495,9 @@ function setBoardDimensions(newDifficulty) {
             break;
         case difficulty.CUSTOM:
             // in this case, the number of rows, columns, and mines are custom-set.
-            numRows = document.getElementById('customNumRows').value;
-            numCols = document.getElementById('customNumCols').value;
-            numMines = document.getElementById('customNumMines').value;
+            var customNumRows = document.getElementById('customNumRows').value;
+            var customNumCols = document.getElementById('customNumCols').value;
+            var customNumMines = document.getElementById('customNumMines').value;
             if (!isValidDimension(numRows, numCols, numMines)) {
                 var invalidDiv = document.getElementById('invalidCustomInput');
                 if (invalidDiv.firstChild) {
@@ -521,6 +521,9 @@ function setBoardDimensions(newDifficulty) {
                 document.getElementById('allcontent').appendChild(invalidCustomInput);
                 return;
             }
+            numRows = customNumRows;
+            numCols = customNumCols;
+            numMines = customNumMines;
             break;
         default:
             // TODO: insert some error handling here--shouldn't ever happen but just in case
