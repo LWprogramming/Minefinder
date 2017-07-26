@@ -386,7 +386,12 @@ function setButtons(gameBoard) {
                     // prevent any more clicking
                     for (let row = 0; row < numRows; row++) {
                         for (let col = 0; col < numCols; col++) {
-                            document.getElementById(buttonIDFromCoordinates(row, col)).disabled = true;
+                            var currentButton = document.getElementById(buttonIDFromCoordinates(row, col));
+                            currentButton.disabled = true;
+                            // flag all mines upon winning
+                            if (gameBoard[row][col].mineStatus == IS_MINE && gameBoard[row][col].status != cellStatusEnum.RIGHTCLICKED) {
+                                toggleFlag(row, col, gameBoard);
+                            }
                         }
                     }
                     document.getElementById('win message').innerHTML = 'Congratulations, you win!';
