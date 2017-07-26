@@ -30,6 +30,4 @@ Tests are in [tests.js](tests.js).
 
 ## Contributing
 
-Pull requests are welcome! Just remember to check your code against the tests beforehand :]
-
-For first-timers, check out the [issues](https://github.com/LWprogramming/Minefinder/issues) labeled "first-timer." These are issues that are a good place to get started. Don't worry too much about getting things "perfect" in your pull request.
+Pull requests are welcome! Please be sure to generally follow the guidelines in the [wiki](https://github.com/LWprogramming/Minefinder/wiki/Contributing).
