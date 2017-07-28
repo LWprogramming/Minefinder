@@ -239,11 +239,6 @@ function toggleFlag(row, col, gameBoard) {
     }
 }
 
-// a bit of a hacky solution but abstracted out to make it clear what's going on in the future.
-function getButtonImage(button) {
-    return button.firstChild;
-}
-
 function setButtons(gameBoard) {
     if (DEBUG) {
         UNCLICKED_COLOR = 'white';
