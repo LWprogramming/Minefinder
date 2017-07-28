@@ -1,4 +1,7 @@
 /*jshint esversion: 6 */
+// function jasmineTest() {
+//     return 'hello';
+// }
 
 // If Javascript is not disabled, then remove the message saying that it is.
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
@@ -88,10 +91,6 @@ function stopTimer() {
 function resetTimer() {
     document.getElementById('timer').innerHTML = 0;
     timer.counter = 0;
-}
-
-function jasmineTest() {
-    return 'hello';
 }
 
 function cell(row, col, status=cellStatusEnum.UNCLICKED, mineStatus=-2) {
