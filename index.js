@@ -5,7 +5,9 @@
 
 // If Javascript is not disabled, then remove the message saying that it is.
 var jsDisabledMessage = document.getElementById("Javascript disabled message");
-jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
+if (jsDisabledMessage != null) {
+    jsDisabledMessage.parentNode.removeChild(jsDisabledMessage);
+}
 
 var DEBUG = false;
 
