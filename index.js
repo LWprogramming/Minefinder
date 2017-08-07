@@ -261,7 +261,6 @@ function setButtons(gameBoard) {
             // refactor this from trying to manipulate strings and into some more coherent pattern, such as an object with a row and column or something. See all locations tagged with the word COORDINATE.
             // https://stackoverflow.com/a/16775485
             button.typeName = 'button';
-            button.className = 'button col-xs-' + 12 / numCols;
             button.disabled = false; // for restarting games.
             button.style.borderLeft = 'solid';
             button.style.borderTop = 'solid';
