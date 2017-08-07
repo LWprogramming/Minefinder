@@ -254,7 +254,6 @@ function setButtons(gameBoard) {
 
     for (let row = 0; row < numRows; row++) {
         var divRow = document.createElement('div');
-        divRow.className = 'row';
         for (let col = 0; col < numCols; col++) {
             var button = document.createElement('button');
             button.id = buttonIDFromCoordinates(row, col);
