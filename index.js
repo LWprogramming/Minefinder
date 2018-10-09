@@ -572,4 +572,10 @@ var instructionsSourceLink = document.createElement('a');
 instructionsSourceLink.href = 'http://www.minesweeper.info/wiki/Windows_Minesweeper#Gameplay';
 instructionsSourceLink.innerHTML = 'Minesweeper wiki';
 instructionsSource.appendChild(instructionsSourceLink);
+var instructionsStrategy = document.createElement('a');
+var br = document.createElement('br');
+instructionsStrategy.href = 'http://www.minesweeper.info/wiki/Strategy';
+instructionsStrategy.innerHTML = 'Minesweeper strategy';
 instructions.appendChild(instructionsSource);
+instructions.appendChild(br)
+instructions.appendChild(instructionsStrategy)
